@@ -1,15 +1,39 @@
 @use "../../styles/variables" as *;
 
-.input {
-  height: 60px;
+.inputWrapper {
+  position: relative;
   width: 90%;
   max-width: 396px;
-  border: 1px solid #eaeaea;
-  border-radius: 8px;
-  padding: 14px 16px;
-  font-size: 18px;
 }
 
-input::placeholder {
+.icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
   color: $color-text-secondary;
+  transition: opacity 0.2s ease;
+}
+
+.input {
+  height: 60px;
+  width: 100%;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 14px 16px; // базовый padding без иконки
+  font-size: 18px;
+
+  &::placeholder {
+    color: $color-text-secondary;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #999;
+  }
+}
+
+.withIcon {
+  padding-left: 48px; // добавляем только если иконка есть
 }

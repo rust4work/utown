@@ -1,22 +1,31 @@
 import React from "react";
 import style from "./Input.module.scss";
+import clsx from "clsx"; // удобная утилита для объединения классов (npm i clsx)
 
-interface InputProps {
-  type?: string;
-  placeholder: string;
-  name: string;
-  [key: string]: any;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  icon?: React.ReactNode;
 }
 
-function Input({ placeholder, type = "text", name, ...rest }: InputProps) {
+function Input({
+  icon,
+  placeholder,
+  type = "text",
+  value,
+  ...rest
+}: InputProps) {
+  const hasValue = Boolean(value && String(value).length > 0);
+
   return (
-    <input
-      className={style.input}
-      type={type}
-      placeholder={placeholder}
-      name={name}
-      {...rest}
-    />
+    <div className={style.inputWrapper}>
+      {!hasValue && icon && <span className={style.icon}>{icon}</span>}
+      <input
+        className={clsx(style.input, { [style.withIcon]: icon })}
+        type={type}
+        placeholder={!hasValue ? placeholder : ""}
+        value={value}
+        {...rest}
+      />
+    </div>
   );
 }
 
