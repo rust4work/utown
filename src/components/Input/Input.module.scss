@@ -1,0 +1,15 @@
+@use "../../styles/variables" as *;
+
+.input {
+  height: 60px;
+  width: 90%;
+  max-width: 396px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 18px;
+}
+
+input::placeholder {
+  color: $color-text-secondary;
+}

@@ -1,0 +1,44 @@
+@use "../../styles/_variables" as *;
+
+* {
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.primary {
+  background-color: #fff;
+  color: #000;
+  width: 90%;
+  max-width: 396px;
+  height: 64px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.secondary {
+  background-color: $color-button-secondary;
+  color: #fff;
+  width: 90%;
+  max-width: 396px;
+  height: 64px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.back {
+  width: 26px;
+  height: 26px;
+  background-image: url("../../assets/images/arrow-left.svg");
+  background-repeat: no-repeat;
+  background-size: 26px 26px;
+  background-color: #fff;
+  &:hover {
+    cursor: pointer;
+  }
+  margin: 16px;
+}
