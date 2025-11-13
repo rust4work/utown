@@ -1,0 +1,81 @@
+@use "../../../styles/variables" as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  margin: 0 auto;
+
+  // background-color: red;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  margin-left: 16px;
+  margin-top: 10px;
+  // justify-content: space-around;
+
+  h1 {
+    color: $color-text-primary;
+    margin-bottom: 45px;
+  }
+
+  .paragraph {
+    color: $color-text-secondary;
+    margin-bottom: 45px;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  label {
+    margin-top: 30px;
+    color: $color-text-primary;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  button {
+    margin-top: 30px;
+  }
+}
+
+footer {
+  margin-top: 0;
+  margin-left: 16px;
+  color: $color-text-secondary;
+  font-size: 14px;
+}
+
+.loginRedirect {
+  width: 100%;
+  max-width: 396px;
+  height: 64px;
+  align-content: center;
+  justify-items: center;
+  p {
+    &:hover {
+      cursor: pointer;
+      color: #000;
+      transition: color 0.4s ease;
+    }
+  }
+}
+
+.terms {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.error {
+  color: $color-warning;
+  font-size: 14px;
+  align-self: flex-start;
+
+  font-weight: 400;
+}

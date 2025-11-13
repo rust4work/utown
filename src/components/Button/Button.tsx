@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Button.module.scss";
+import style from "./Button.module.scss";
 
 interface ButtonProps {
   children?: React.ReactNode;
@@ -24,7 +24,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={typeOfButton === "back" ? () => window.history.back() : onClick}
-      className={`${styles[typeOfButton || "primary"]} ${className || ""}`}
+      className={`${style[typeOfButton || "primary"]} ${className || ""}`}
       onSubmit={typeOfButton === "submit" ? onSubmit : undefined}
     >
       {children || label}

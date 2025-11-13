@@ -26,9 +26,12 @@ function RecoverPasswordPage() {
           Enter the phone number you registered earlier
         </p>
         <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
-          <h5 className={style.form__header}>Phone number</h5>
+          <label className={style.form__header} htmlFor="phoneNumber">
+            Phone number
+          </label>
 
           <Input
+            id="phoneNumber"
             type="text"
             placeholder="Phone number"
             icon={<img src={call} alt="call icon" />}
