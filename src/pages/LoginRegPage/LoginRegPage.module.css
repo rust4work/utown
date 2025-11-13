@@ -2,7 +2,6 @@
   background-image: url("../../assets//images/background.svg");
   background-size: cover;
   background-repeat: no-repeat;
-
   height: 100vh;
   display: flex;
   flex-direction: column;

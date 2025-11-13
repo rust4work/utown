@@ -21,7 +21,7 @@
   width: 100%;
   border: 1px solid #eaeaea;
   border-radius: 8px;
-  padding: 14px 16px; // базовый padding без иконки
+  padding: 14px 16px; // базовый padding
   font-size: 18px;
 
   &::placeholder {
@@ -35,5 +35,29 @@
 }
 
 .withIcon {
-  padding-left: 48px; // добавляем только если иконка есть
+  padding-left: 48px;
+}
+
+.withPasswordToggle {
+  padding-right: 48px;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 16px;
+  top: 0;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  img,
+  svg {
+    width: 24px;
+    height: 24px;
+    color: $color-text-secondary;
+  }
 }

@@ -3,7 +3,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 
   margin: 0 auto;
 
@@ -26,7 +26,7 @@
 
   .paragraph {
     color: $color-text-secondary;
-    margin-bottom: 45px;
+    margin-bottom: 25px;
   }
 }
 
@@ -35,7 +35,7 @@ form {
   flex-direction: column;
   gap: 16px;
   label {
-    margin-top: 30px;
+    margin-top: 20px;
     color: $color-text-primary;
     font-size: 18px;
     font-weight: 500;

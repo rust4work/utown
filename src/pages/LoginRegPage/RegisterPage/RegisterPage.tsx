@@ -55,7 +55,7 @@ function RegisterPage() {
               required: "Phone number is required",
               pattern: {
                 value: /^[0-9]{10,15}$/,
-                message: "Invalid phone number",
+                message: "Invalid phone number format",
               },
             })}
           />
@@ -68,13 +68,14 @@ function RegisterPage() {
           <Input
             type="password"
             placeholder="Enter your password"
+            password={true}
             id="password"
             icon={<img src={lock} alt="lock icon" />}
             {...register("password", {
               required: "Password is required",
               minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
+                value: 9,
+                message: "Password must be at least 9 characters long",
               },
             })}
           />
@@ -87,6 +88,7 @@ function RegisterPage() {
           <Input
             type="password"
             placeholder="Repeat your password"
+            password={true}
             id="confirmPassword"
             icon={<img src={lock} alt="lock icon" />}
             {...register("confirmPassword", {
