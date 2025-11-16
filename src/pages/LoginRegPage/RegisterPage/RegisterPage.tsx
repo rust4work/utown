@@ -30,7 +30,7 @@ function RegisterPage() {
 
   const onSubmit = (data: RegisterFormData) => {
     console.log("Registration data:", data);
-    navigateTo("/client")();
+    navigateTo("/verification")();
   };
 
   return (

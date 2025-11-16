@@ -5,6 +5,7 @@ import Button from "../../../components/Button/Button";
 import style from "./LoginPage.module.scss";
 import Logo from "../../../components/Logo/Logo";
 import Input from "../../../components/Input/Input";
+import { login } from "../../../api/login";
 
 type LoginFormData = {
   phoneNumber: string;
@@ -22,9 +23,15 @@ function LoginPage() {
     mode: "onBlur",
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log("Form data:", data);
-    navigateTo("/client")();
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const response = await login(data.phoneNumber, data.password);
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("refreshToken", response.refreshToken);
+      navigateTo("/client")();
+    } catch (err: any) {
+      console.error("Login error:", err.message);
+    }
   };
 
   return (
@@ -55,11 +62,12 @@ function LoginPage() {
           <Input
             type="password"
             placeholder="Password"
+            password={true}
             {...register("password", {
               required: "Password is required",
               minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
+                value: 9,
+                message: "Password must be at least 9 characters",
               },
             })}
           />

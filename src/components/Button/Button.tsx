@@ -9,6 +9,7 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   typeOfButton?: string;
   className?: string;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -19,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   type = "button",
   typeOfButton,
   className,
+  disabled = false,
 }) => {
   return (
     <button
@@ -26,6 +28,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={typeOfButton === "back" ? () => window.history.back() : onClick}
       className={`${style[typeOfButton || "primary"]} ${className || ""}`}
       onSubmit={typeOfButton === "submit" ? onSubmit : undefined}
+      disabled={disabled}
     >
       {children || label}
     </button>
