@@ -29,8 +29,7 @@ function RegisterPage() {
   const passwordValue = watch("password");
 
   const onSubmit = (data: RegisterFormData) => {
-    console.log("Registration data:", data);
-    navigateTo("/verification")();
+    navigateTo("/verification", data)();
   };
 
   return (

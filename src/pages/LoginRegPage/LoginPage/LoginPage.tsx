@@ -1,11 +1,16 @@
 import React from "react";
+//utils
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigateTo } from "../../../hooks/useNavigateTo";
+import { login } from "../../../api/login";
+
+//components
 import Button from "../../../components/Button/Button";
 import style from "./LoginPage.module.scss";
 import Logo from "../../../components/Logo/Logo";
 import Input from "../../../components/Input/Input";
-import { login } from "../../../api/login";
+import { Spin, Alert } from "antd";
 
 type LoginFormData = {
   phoneNumber: string;
@@ -14,6 +19,8 @@ type LoginFormData = {
 
 function LoginPage() {
   const { navigateTo } = useNavigateTo();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -25,12 +32,15 @@ function LoginPage() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
+      setLoading(true);
+      setError(null);
       const response = await login(data.phoneNumber, data.password);
       localStorage.setItem("token", response.token);
       localStorage.setItem("refreshToken", response.refreshToken);
       navigateTo("/client")();
     } catch (err: any) {
-      console.error("Login error:", err.message);
+      setError("");
+      setLoading(false);
     }
   };
 
@@ -74,9 +84,24 @@ function LoginPage() {
           {errors.password && (
             <p className={style.error}>{errors.password.message}</p>
           )}
+          {/*error alert*/}
+          <div>
+            {error && (
+              <p className={style.error}>
+                Couldn't find user. Please check username and password and try
+                again
+              </p>
+            )}
+          </div>
 
           <Button label="Log in" typeOfButton="secondary" type="submit" />
         </form>
+        {/* Loading */}
+        {loading && (
+          <div className={style.loader}>
+            <Spin size="large" />
+          </div>
+        )}
       </main>
 
       <footer>
