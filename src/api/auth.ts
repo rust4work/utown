@@ -7,18 +7,14 @@ export interface RegisterPayload {
 }
 
 export interface RegisterResponse {
-  token: string;
-  refreshToken: string;
-  user: {
-    id: number;
-    username: string;
-    fullName: string;
-    isActive: boolean;
-    defaultAddress: null;
-    roles: [string];
-    createdAt: string;
-    updatedAt: string;
-  };
+  id: number;
+  username: string;
+  fullName: string;
+  isActive: boolean;
+  defaultAddress: number;
+  roles: string[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 const API_URL = "/api/auth";

@@ -6,6 +6,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+import ProtectedRoute from "./ProtectedRoutes"; // новее
+
 // Pages
 import LoginRegPage from "../pages/LoginRegPage/LoginRegPage";
 import LoginPage from "../pages/LoginRegPage/LoginPage/LoginPage";
@@ -19,14 +21,19 @@ import Verification from "../pages/LoginRegPage/RegisterPage/Verification/Verifi
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      {/* Public */}
       <Route path="/" element={<LoginRegPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/verification" element={<Verification />} />
       <Route path="/recover-password" element={<RecoverPasswordPage />} />
-      <Route path="/client" element={<ClientDashboard />} />
-      <Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/restaraunter" element={<ReastaraunterDashboard />} />
+
+      {/* Protected */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/client" element={<ClientDashboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/restaraunter" element={<ReastaraunterDashboard />} />
+      </Route>
     </>
   )
 );
