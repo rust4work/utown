@@ -35,8 +35,8 @@ function LoginPage() {
       setLoading(true);
       setError(null);
       const response = await login(data.phoneNumber, data.password);
-      localStorage.setItem("token", response.token);
-      localStorage.setItem("refreshToken", response.refreshToken);
+      sessionStorage.setItem("token", response.token);
+      sessionStorage.setItem("refreshToken", response.refreshToken);
       navigateTo("/client")();
     } catch (err: any) {
       setError("");

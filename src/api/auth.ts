@@ -6,7 +6,7 @@ export interface RegisterPayload {
   role: "CLIENT";
 }
 
-export interface RegisterResponse {
+export interface UserProfile {
   id: number;
   username: string;
   fullName: string;
@@ -15,6 +15,21 @@ export interface RegisterResponse {
   roles: string[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface RegisterResponse {
+  token: string;
+  refreshToken: string;
+  user: {
+    id: 0;
+    username: string;
+    fullName: string;
+    isActive: boolean;
+    defaultAddress: number;
+    roles: [string];
+    createdAt: string;
+    updatedAt: string;
+  };
 }
 
 const API_URL = "/api/auth";

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { RegisterResponse } from "../../api/auth";
+import { RegisterResponse, UserProfile } from "../../api/auth";
 import { Spin } from "antd";
 
 function ClientDashboard() {
-  const [profile, setProfile] = useState<RegisterResponse | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -19,7 +19,7 @@ function ClientDashboard() {
           }
         );
 
-        const data: RegisterResponse = await res.json();
+        const data: UserProfile = await res.json();
         setProfile(data);
       } catch (error) {
         console.error("Ошибка загрузки профиля", error);
@@ -39,6 +39,7 @@ function ClientDashboard() {
       <h4>ID: {profile.id}</h4>
       <h4>Full name: {profile.fullName}</h4>
       <h4>Active: {profile.isActive ? "Yes" : "No"}</h4>
+      <h4>roles:{profile.roles}</h4>
     </div>
   );
 }

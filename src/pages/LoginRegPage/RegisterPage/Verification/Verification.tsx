@@ -49,7 +49,11 @@ function Verification() {
       localStorage.setItem("refreshToken", response.refreshToken);
       localStorage.setItem("user", JSON.stringify(response.user));
 
-      navigateTo("/client", response)();
+      if (response.user.roles.includes("CLIENT")) {
+        navigateTo("/client")();
+      } else if (response.user.roles.includes("RESTAURATEUR")) {
+        navigateTo("/restaurateur")();
+      }
     } catch (e: any) {
       alert(e.message || "Registration error");
     }
