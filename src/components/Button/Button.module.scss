@@ -4,7 +4,15 @@
   outline: none;
   border: none;
   box-sizing: border-box;
+}
+
+button {
   border-radius: 10px;
+  &[disabled] {
+    cursor: not-allowed;
+
+    opacity: 0.6;
+  }
 }
 
 .primary {
@@ -16,6 +24,8 @@
 
   &:hover {
     cursor: pointer;
+    background-color: #eaeaea;
+    transition: background-color 0.3s ease;
   }
 }
 
@@ -27,6 +37,8 @@
   height: 64px;
   &:hover {
     cursor: pointer;
+    background-color: #074cd5;
+    transition: background-color 0.3s ease;
   }
 }
 

@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vw;
 }
 
 .backButton {
@@ -14,6 +13,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 20px;
   .form {
     width: 100%;
     display: flex;
@@ -45,6 +45,7 @@ footer {
 }
 
 .error {
+  width: 80%;
   color: $color-warning;
   font-size: 14px;
   align-self: flex-start;
@@ -54,4 +55,12 @@ footer {
 .inputError {
   border: 2px solid $color-warning;
   color: $color-warning;
+}
+
+.loader {
+  // "flex justify-center items-center flex-1 mt-10"
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
