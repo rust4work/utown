@@ -17,6 +17,9 @@ import ClientDashboard from "../pages/Client/ClientDashboard";
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import ReastaraunterDashboard from "../pages/Restaurateur/RestaurateurDashboard";
 import Verification from "../pages/LoginRegPage/RegisterPage/Verification/Verification";
+import ClientHome from "../pages/Client/ClientLayouts/ClientHome/ClientHome";
+import ClientFavourites from "../pages/Client/ClientLayouts/ClientFavourites/ClientFavourites";
+import ClientProfile from "../pages/Client/ClientLayouts/ClientProfile/ClientProfile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,8 +33,17 @@ const router = createBrowserRouter(
 
       {/* Protected */}
       <Route element={<ProtectedRoute />}>
-        <Route path="/client" element={<ClientDashboard />} />
+        <Route path="/client" element={<ClientDashboard />}>
+          <Route index element={<ClientHome />} />
+          <Route path="home" element={<ClientHome />} />
+          <Route path="favourites" element={<ClientFavourites />} />
+          <Route path="profile" element={<ClientProfile />} />
+        </Route>
+
+        {/* ADMIN */}
         <Route path="/admin" element={<AdminDashboard />} />
+
+        {/* RESTAURATEUR */}
         <Route path="/restaurateur" element={<ReastaraunterDashboard />} />
       </Route>
     </>
