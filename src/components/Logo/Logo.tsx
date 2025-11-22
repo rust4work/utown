@@ -1,27 +1,28 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import logoFull from "../../assets/images/Logo-full.svg";
 import logoSm from "../../assets/images/Logo.svg";
 import logoSmWhite from "../../assets/images/logoSmWhite.svg";
 
-function Logo({ type = "small" }) {
+interface LogoProps {
+  type?: "full" | "white" | "small";
+  style?: CSSProperties;
+}
+
+function Logo({ type = "small", style }: LogoProps) {
   let logoSrc;
 
   switch (type) {
     case "full":
       logoSrc = logoFull;
       break;
-
     case "white":
       logoSrc = logoSmWhite;
       break;
-
-    case "small":
     default:
       logoSrc = logoSm;
-      break;
   }
 
-  return <img src={logoSrc} alt="Company logo" />;
+  return <img src={logoSrc} alt="Company logo" style={style} />;
 }
 
 export default Logo;

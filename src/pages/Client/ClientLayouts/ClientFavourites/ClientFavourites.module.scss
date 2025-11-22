@@ -1,0 +1,28 @@
+.container {
+  height: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+
+  .left {
+    width: 42px;
+  }
+  .logo {
+    margin: 0 auto;
+  }
+  .bell {
+    margin-right: 8px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.main {
+  background-color: gray;
+}

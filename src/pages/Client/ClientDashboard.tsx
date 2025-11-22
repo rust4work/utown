@@ -17,6 +17,9 @@ import userActive from "../../assets/images/icons/user-square-active.svg";
 
 function ClientDashboard() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [customHeader, setCustomHeader] = useState<React.ReactNode | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -43,53 +46,46 @@ function ClientDashboard() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      {/** --- Navbar --- */}
-      <header>
-        <div className={styles.logo}>
-          <Logo type="white" />
-        </div>
-        <div className={styles.bell}>
-          <img src={bell} alt="" />
-        </div>
-      </header>
-      {/** --- Layouts --- */}
-      <main className={styles.content}>
-        {profile ? (
-          <Outlet context={profile} />
-        ) : (
-          <Spin size="large" style={{ alignSelf: "center" }} />
-        )}
-      </main>
-      {/** --- Footer --- */}
-      <footer className={styles.footer}>
-        <NavLink to="/client/home" className={styles.navItem}>
-          {({ isActive }) => (
-            <>
-              <img src={isActive ? homeActive : homeDefault} alt="Home" />
-              <p className={isActive ? styles.activeText : ""}>Home</p>
-            </>
+    <>
+      <div className={styles.container}>
+        {/** --- Layouts --- */}
+        <main className={styles.content}>
+          {profile ? (
+            <Outlet context={{ profile, setCustomHeader }} />
+          ) : (
+            <Spin size="large" style={{ alignSelf: "center" }} />
           )}
-        </NavLink>
-        <NavLink to="/client/favourites" className={styles.navItem}>
-          {({ isActive }) => (
-            <>
-              <img src={isActive ? starActive : starDefault} alt="Home" />
+        </main>
+        {/** --- Footer --- */}
+        <footer className={styles.footer}>
+          <NavLink to="/client/home" className={styles.navItem}>
+            {({ isActive }) => (
+              <>
+                <img src={isActive ? homeActive : homeDefault} alt="Home" />
+                <p className={isActive ? styles.activeText : ""}>Home</p>
+              </>
+            )}
+          </NavLink>
+          <NavLink to="/client/favourites" className={styles.navItem}>
+            {({ isActive }) => (
+              <>
+                <img src={isActive ? starActive : starDefault} alt="Home" />
 
-              <p className={isActive ? styles.activeText : ""}>Favourites</p>
-            </>
-          )}
-        </NavLink>
-        <NavLink to="/client/profile" className={styles.navItem}>
-          {({ isActive }) => (
-            <>
-              <img src={isActive ? userActive : userDefault} alt="Home" />
-              <p className={isActive ? styles.activeText : ""}>Profile</p>
-            </>
-          )}
-        </NavLink>
-      </footer>
-    </div>
+                <p className={isActive ? styles.activeText : ""}>Favourites</p>
+              </>
+            )}
+          </NavLink>
+          <NavLink to="/client/profile" className={styles.navItem}>
+            {({ isActive }) => (
+              <>
+                <img src={isActive ? userActive : userDefault} alt="Home" />
+                <p className={isActive ? styles.activeText : ""}>Profile</p>
+              </>
+            )}
+          </NavLink>
+        </footer>
+      </div>
+    </>
   );
 }
 

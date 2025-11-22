@@ -1,0 +1,36 @@
+.container {
+  background-image: url("/src/assets/images/background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.headerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0 8px 0;
+
+  .left {
+    width: 42px; // такая же ширина, как у bell
+  }
+
+  .logo {
+    margin: 0 auto; // центрируем
+  }
+
+  .bell {
+    margin-right: 8px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.main {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  background-color: #fff000;
+  height: 100%;
+}

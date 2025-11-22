@@ -1,0 +1,25 @@
+.container {
+  background-color: #292929;
+  height: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 24px 0 8px 0;
+
+  .left {
+    width: 42px;
+  }
+  .logo {
+    margin: 0 auto;
+  }
+  .bell {
+    margin-right: 8px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
