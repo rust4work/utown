@@ -22,7 +22,7 @@ function ClientFavourites() {
         </div>
       </header>
       <main className={styles.main}>
-        <h1>my favzzz</h1>
+        <h1>Your favourites</h1>
       </main>
     </div>
   );

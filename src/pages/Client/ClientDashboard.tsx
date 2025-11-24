@@ -30,7 +30,7 @@ function ClientDashboard() {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`, // если нужен токен
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`, // если нужен токен
             },
           }
         );
@@ -58,7 +58,7 @@ function ClientDashboard() {
         </main>
         {/** --- Footer --- */}
         <footer className={styles.footer}>
-          <NavLink to="/client/home" className={styles.navItem}>
+          <NavLink to="/client" className={styles.navItem}>
             {({ isActive }) => (
               <>
                 <img src={isActive ? homeActive : homeDefault} alt="Home" />
