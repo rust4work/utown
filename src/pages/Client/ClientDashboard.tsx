@@ -58,7 +58,7 @@ function ClientDashboard() {
         </main>
         {/** --- Footer --- */}
         <footer className={styles.footer}>
-          <NavLink to="/client" className={styles.navItem}>
+          <NavLink to="/client/home" className={styles.navItem}>
             {({ isActive }) => (
               <>
                 <img src={isActive ? homeActive : homeDefault} alt="Home" />

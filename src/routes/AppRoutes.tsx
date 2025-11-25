@@ -2,6 +2,7 @@ import React from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -34,7 +35,7 @@ const router = createBrowserRouter(
       {/* Protected */}
       <Route element={<ProtectedRoute />}>
         <Route path="/client" element={<ClientDashboard />}>
-          <Route index element={<ClientHome />} />
+          <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<ClientHome />} />
           <Route path="favourites" element={<ClientFavourites />} />
           <Route path="profile" element={<ClientProfile />} />

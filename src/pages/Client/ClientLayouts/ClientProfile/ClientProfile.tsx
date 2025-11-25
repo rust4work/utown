@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ClientProfile.module.scss";
 import bell from "../../../../assets/images/icons/bell.svg";
 import Logo from "../../../../components/Logo/Logo";
+import Features from "../../../../components/Features/Features";
 function ClientProfile() {
   return (
     <div className={styles.container}>
@@ -16,6 +17,9 @@ function ClientProfile() {
           <img src={bell} alt="" />
         </div>
       </header>
+      <main className={styles.main}>
+        <Features typeOfTab="flex" />
+      </main>
     </div>
   );
 }
