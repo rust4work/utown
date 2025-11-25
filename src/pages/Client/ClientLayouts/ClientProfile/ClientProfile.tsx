@@ -2,18 +2,19 @@ import React from "react";
 import styles from "./ClientProfile.module.scss";
 import Logo from "../../../../components/Logo/Logo";
 import Features from "../../../../components/Features/Features";
-import { Outlet } from "react-router-dom";
+import { useLogout } from "../../../../hooks/useLogout";
 //icons
 import bell from "../../../../assets/images/icons/bell.svg";
 import account from "../../../../assets/images/icons/profile-circle.svg";
 import settings from "../../../../assets/images/icons/setting-2.svg";
 import favourite from "../../../../assets/images/icons/star-white.svg";
 import contact from "../../../../assets/images/icons/sms-tracking.svg";
-import logout from "../../../../assets/images/icons/logout.svg";
+import logoutIcon from "../../../../assets/images/icons/logout.svg";
 import { useNavigateTo } from "../../../../hooks/useNavigateTo";
 
 function ClientProfile() {
   const { navigateTo } = useNavigateTo();
+  const { logout } = useLogout();
   return (
     <div className={styles.container}>
       <header className={styles.headerContainer}>
@@ -45,10 +46,10 @@ function ClientProfile() {
           </li>
           <li onClick={navigateTo("/client/profile/contact")}>
             <img src={contact} alt="" />
-            <p>Contact Sup port</p>
+            <p>Contact Support</p>
           </li>
-          <li>
-            <img src={logout} alt="" />
+          <li onClick={logout}>
+            <img src={logoutIcon} alt="" />
             <p>Log Out</p>
           </li>
         </ul>
