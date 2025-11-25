@@ -11,7 +11,7 @@ type TabProps = {
 
 function TabNavigation({ typeOfTab }: TabProps) {
   const mobileText = typeOfTab === "grid" ? "Mobile connection" : "Connection";
-  const foodDelivery = typeOfTab === "grid" ? "Food Delivery" : "Delivery";
+  const foodDelivery = typeOfTab === "grid" ? "Food Delivery" : "Food";
   return (
     <div className={`${styles.container} ${styles[typeOfTab]}`}>
       <div className={`${styles.featureTab} ${styles.foodDelivery}`}>

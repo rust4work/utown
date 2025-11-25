@@ -22,7 +22,7 @@ function ClientHome() {
       </header>
 
       <main className={styles.main}>
-        <h2>Hello, user</h2>
+        <h2>Hello, User!</h2>
         <div className={styles.headerTabs}>
           <WeatherCard />
           <ActiveOrders />

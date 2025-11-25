@@ -25,5 +25,31 @@
 }
 
 .main {
+  color: #fff;
   padding: 22px 16px;
+
+  h2 {
+    margin-bottom: 16px;
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 32px;
+
+  li {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: fit-content;
+    gap: 11px;
+
+    cursor: pointer;
+
+    &:last-child {
+      color: #ff5959;
+    }
+  }
 }
