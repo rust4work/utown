@@ -21,6 +21,9 @@ import Verification from "../pages/LoginRegPage/RegisterPage/Verification/Verifi
 import ClientHome from "../pages/Client/ClientLayouts/ClientHome/ClientHome";
 import ClientFavourites from "../pages/Client/ClientLayouts/ClientFavourites/ClientFavourites";
 import ClientProfile from "../pages/Client/ClientLayouts/ClientProfile/ClientProfile";
+import Account from "../pages/Client/ClientLayouts/ClientProfile/Account/Account";
+import Information from "../pages/Client/ClientLayouts/ClientProfile/Information/Information";
+import Contact from "../pages/Client/ClientLayouts/ClientProfile/Contact/Contact";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,9 +39,14 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoute />}>
         <Route path="/client" element={<ClientDashboard />}>
           <Route index element={<Navigate to="home" replace />} />
+          {/*Footer navigation*/}
           <Route path="home" element={<ClientHome />} />
           <Route path="favourites" element={<ClientFavourites />} />
           <Route path="profile" element={<ClientProfile />} />
+          {/* PROFILE LAYOUT */}
+          <Route path="profile/account" element={<Account />} />
+          <Route path="profile/information" element={<Information />} />
+          <Route path="profile/contact" element={<Contact />} />
         </Route>
 
         {/* ADMIN */}

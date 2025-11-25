@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ClientProfile.module.scss";
 import Logo from "../../../../components/Logo/Logo";
 import Features from "../../../../components/Features/Features";
-
+import { Outlet } from "react-router-dom";
 //icons
 import bell from "../../../../assets/images/icons/bell.svg";
 import account from "../../../../assets/images/icons/profile-circle.svg";
@@ -10,8 +10,10 @@ import settings from "../../../../assets/images/icons/setting-2.svg";
 import favourite from "../../../../assets/images/icons/star-white.svg";
 import contact from "../../../../assets/images/icons/sms-tracking.svg";
 import logout from "../../../../assets/images/icons/logout.svg";
+import { useNavigateTo } from "../../../../hooks/useNavigateTo";
 
 function ClientProfile() {
+  const { navigateTo } = useNavigateTo();
   return (
     <div className={styles.container}>
       <header className={styles.headerContainer}>
@@ -29,19 +31,19 @@ function ClientProfile() {
         <h2>Hello, User!</h2>
         <Features typeOfTab="flex" />
         <ul>
-          <li>
+          <li onClick={navigateTo("/client/profile/account")}>
             <img src={account} alt="" />
             <p>Account</p>
           </li>
-          <li>
+          <li onClick={navigateTo("/client/profile/information")}>
             <img src={settings} alt="" />
             <p>Information</p>
           </li>
-          <li>
+          <li onClick={navigateTo("/client/favourites")}>
             <img src={favourite} alt="" />
             <p>Favourites</p>
           </li>
-          <li>
+          <li onClick={navigateTo("/client/profile/contact")}>
             <img src={contact} alt="" />
             <p>Contact Sup port</p>
           </li>
