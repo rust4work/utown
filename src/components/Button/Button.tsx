@@ -25,7 +25,11 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       type={type}
-      onClick={typeOfButton === "back" ? () => window.history.back() : onClick}
+      onClick={
+        typeOfButton === "back" || typeOfButton === "backWhite"
+          ? () => window.history.back()
+          : onClick
+      }
       className={`${style[typeOfButton || "primary"]} ${className || ""}`}
       onSubmit={typeOfButton === "submit" ? onSubmit : undefined}
       disabled={disabled}
