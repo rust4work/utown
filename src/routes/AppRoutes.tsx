@@ -24,6 +24,7 @@ import ClientProfile from "../pages/Client/ClientLayouts/ClientProfile/ClientPro
 import Account from "../pages/Client/ClientLayouts/ClientProfile/Account/Account";
 import Information from "../pages/Client/ClientLayouts/ClientProfile/Information/Information";
 import Contact from "../pages/Client/ClientLayouts/ClientProfile/Contact/Contact";
+import EditInfo from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditInfo";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
           <Route path="profile" element={<ClientProfile />} />
           {/* PROFILE LAYOUT */}
           <Route path="profile/account" element={<Account />} />
+          <Route path="profile/edit" element={<EditInfo />} />
           <Route path="profile/information" element={<Information />} />
           <Route path="profile/contact" element={<Contact />} />
         </Route>

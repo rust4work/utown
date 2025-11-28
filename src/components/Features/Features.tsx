@@ -10,7 +10,7 @@ type TabProps = {
 };
 
 function TabNavigation({ typeOfTab }: TabProps) {
-  const mobileText = typeOfTab === "grid" ? "Mobile connection" : "Connection";
+  const mobileText = typeOfTab === "grid" ? "Coming soon..." : "Soon...";
   const foodDelivery = typeOfTab === "grid" ? "Food Delivery" : "Food";
   return (
     <div className={`${styles.container} ${styles[typeOfTab]}`}>
@@ -20,15 +20,15 @@ function TabNavigation({ typeOfTab }: TabProps) {
       </div>
       <div className={`${styles.featureTab} ${styles.mobile}`}>
         <img src={mobile} alt="" />
-        <p>{mobileText}</p>
+        <p>Soon...</p>
       </div>
       <div className={`${styles.featureTab} ${styles.services}`}>
         <img src={services} alt="" />
-        <p>Services</p>
+        <p>Soon...</p>
       </div>
       <div className={`${styles.featureTab} ${styles.jobs}`}>
         <img src={jobIcon} alt="" />
-        <p>Jobs</p>
+        <p>Soon...</p>
       </div>
     </div>
   );

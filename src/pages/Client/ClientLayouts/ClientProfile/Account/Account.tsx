@@ -6,8 +6,13 @@ import bell from "../../../../../assets/images/icons/bell.svg";
 import Button from "../../../../../components/Button/Button";
 import profilePic from "../../../../../assets/images/icons/profile-circle.svg";
 import arrowRight from "../../../../../assets/images/arrow-right.svg";
+import { useNavigateTo } from "../../../../../hooks/useNavigateTo";
+import { useEffect } from "react";
+import { UserProfile } from "../../../../../api/auth";
 
 function Account() {
+  const { navigateTo } = useNavigateTo();
+
   return (
     <div className={styles.container}>
       <header className={styles.headerContainer}>
@@ -31,7 +36,10 @@ function Account() {
           <p>Name</p>
         </div>
         <div className={styles.edit}>
-          <button className={styles.buttonWrapper}>
+          <button
+            className={styles.buttonWrapper}
+            onClick={navigateTo("/client/profile/edit")}
+          >
             Edit Personal Information <img src={arrowRight} alt="" />
           </button>
 
