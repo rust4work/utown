@@ -5,6 +5,7 @@ import bell from "../../../../assets/images/icons/bell.svg";
 import WeatherCard from "../../../../components/WeatherCard/WeatherCard";
 import ActiveOrders from "../../../../components/ActiveOrders/ActiveOrders";
 import Features from "../../../../components/Features/Features";
+import Greeting from "../../../../components/Greeting/Greeting";
 
 function ClientHome() {
   return (
@@ -22,7 +23,7 @@ function ClientHome() {
       </header>
 
       <main className={styles.main}>
-        <h2>Hello, User!</h2>
+        <Greeting />
         <div className={styles.headerTabs}>
           <WeatherCard />
           <ActiveOrders />

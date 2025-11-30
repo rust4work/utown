@@ -3,6 +3,7 @@ import styles from "./ClientProfile.module.scss";
 import Logo from "../../../../components/Logo/Logo";
 import Features from "../../../../components/Features/Features";
 import { useLogout } from "../../../../hooks/useLogout";
+import { useState, useEffect } from "react";
 //icons
 import bell from "../../../../assets/images/icons/bell.svg";
 import account from "../../../../assets/images/icons/profile-circle.svg";
@@ -11,10 +12,12 @@ import favourite from "../../../../assets/images/icons/star-white.svg";
 import contact from "../../../../assets/images/icons/sms-tracking.svg";
 import logoutIcon from "../../../../assets/images/icons/logout.svg";
 import { useNavigateTo } from "../../../../hooks/useNavigateTo";
+import Greeting from "../../../../components/Greeting/Greeting";
 
 function ClientProfile() {
   const { navigateTo } = useNavigateTo();
   const { logout } = useLogout();
+
   return (
     <div className={styles.container}>
       <header className={styles.headerContainer}>
@@ -29,7 +32,7 @@ function ClientProfile() {
         </div>
       </header>
       <main className={styles.main}>
-        <h2>Hello, User!</h2>
+        <Greeting />
         <Features typeOfTab="flex" />
         <ul>
           <li onClick={navigateTo("/client/profile/account")}>
