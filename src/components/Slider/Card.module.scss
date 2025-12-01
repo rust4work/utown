@@ -1,0 +1,39 @@
+.customWrapper {
+  background-size: cover;
+  background-position: center;
+
+  width: 180px;
+  height: 115px;
+  border-radius: 16px;
+
+  color: #283fa3;
+  padding: 16px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  a {
+    text-decoration: none;
+    color: #283fa3;
+    &:hover {
+      text-decoration: underline;
+      color: #0e085e;
+    }
+  }
+}
+
+.moreCard {
+  width: 180px;
+  height: 115px;
+  border-radius: 16px;
+  background-color: #cbcbcb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.card {
+  cursor: pointer;
+}

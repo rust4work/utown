@@ -6,6 +6,11 @@ import WeatherCard from "../../../../components/WeatherCard/WeatherCard";
 import ActiveOrders from "../../../../components/ActiveOrders/ActiveOrders";
 import Features from "../../../../components/Features/Features";
 import Greeting from "../../../../components/Greeting/Greeting";
+import { CardSlider } from "../../../../components/Slider/CardSlider";
+import { Card, CustomCard } from "../../../../components/Slider/Card";
+import ad1 from "../../../../assets/images/ads/Ad-1.svg";
+import ad2 from "../../../../assets/images/ads/Ad-2.svg";
+import { CardMore } from "../../../../components/Slider/CardMore";
 
 function ClientHome() {
   return (
@@ -30,6 +35,16 @@ function ClientHome() {
         </div>
         <div className={styles.features}>
           <Features typeOfTab="grid" />
+        </div>
+        <div className={styles.ads}>
+          <CardSlider
+            cards={[
+              <Card title="" image={ad1} />,
+              <Card title="" image={ad2} />,
+              <CustomCard />,
+              <CardMore onClick={() => console.log("clicked")} />,
+            ]}
+          />
         </div>
       </main>
     </div>
