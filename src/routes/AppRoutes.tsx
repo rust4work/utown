@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoutes"; // новее
+import { UserProvider } from "../utils/UserContext";
 
 // Pages
 import LoginRegPage from "../pages/LoginRegPage/LoginRegPage";
@@ -64,7 +65,11 @@ const router = createBrowserRouter(
 );
 
 function AppRoutes() {
-  return <RouterProvider router={router} />;
+  return (
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  );
 }
 
 export default AppRoutes;

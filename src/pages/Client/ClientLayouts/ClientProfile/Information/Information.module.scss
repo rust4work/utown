@@ -1,0 +1,56 @@
+.container {
+  background-color: #292929;
+  height: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0 8px 0;
+
+  .left {
+    width: 42px;
+  }
+  .logo {
+    margin: 0 auto;
+  }
+  .bell {
+    margin-right: 8px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+.main {
+  margin: 16px;
+
+  h2 {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+}
+.edit {
+  margin-top: 16px;
+  margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .buttonWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    height: 50px;
+    cursor: pointer;
+  }
+}
+
+.ant-modal {
+  color: #fff !important;
+}
