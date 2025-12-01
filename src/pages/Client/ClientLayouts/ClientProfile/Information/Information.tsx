@@ -6,6 +6,7 @@ import bell from "../../../../../assets/images/icons/bell.svg";
 import arrowRight from "../../../../../assets/images/arrow-right.svg";
 import { useNavigateTo } from "../../../../../hooks/useNavigateTo";
 import { Modal } from "antd";
+import HeaderDark from "../../../../../components/HeaderDark/HeaderDark";
 
 function Information() {
   const { navigateTo } = useNavigateTo();
@@ -24,19 +25,7 @@ function Information() {
   return (
     <div className={styles.container}>
       {contextHolder}
-      <header className={styles.headerContainer}>
-        <div className={styles.left}>
-          <Button typeOfButton="backWhite" />
-        </div>
-
-        <div className={styles.logo}>
-          <Logo type="white" />
-        </div>
-
-        <div className={styles.bell}>
-          <img src={bell} alt="" />
-        </div>
-      </header>
+      <HeaderDark />
       <main className={styles.main}>
         <h2>Information</h2>
         <div className={styles.edit}>
