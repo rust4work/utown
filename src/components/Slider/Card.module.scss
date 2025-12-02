@@ -37,3 +37,46 @@
 .card {
   cursor: pointer;
 }
+
+.restaurantsWrapper {
+  background-color: #eaeaea;
+  width: 190px;
+  height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  img {
+    height: 126px;
+    width: 190px;
+    object-fit: cover;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+    padding: 13px;
+    height: calc(100% - 126px);
+    h4 {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    p {
+      font-size: 12px;
+      font-weight: 400;
+      margin-bottom: auto;
+      margin-top: 4px;
+    }
+    .delivery {
+      display: flex;
+      align-items: center;
+
+      gap: 6px;
+      color: #a4a4a4;
+      img {
+        width: auto;
+        height: 18px;
+        object-fit: contain;
+        margin-right: auto;
+      }
+    }
+  }
+}

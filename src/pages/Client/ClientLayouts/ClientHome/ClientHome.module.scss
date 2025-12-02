@@ -2,15 +2,25 @@
   background-image: url("/src/assets/images/background.svg");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .headerContainer {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: transparent;
+  backdrop-filter: blur(3px);
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 24px 0 8px 0;
+  background-image: url("/src/assets/images/background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
 
   .left {
     width: 42px; // такая же ширина, как у bell
@@ -30,10 +40,13 @@
 }
 
 .main {
+  flex: 1;
+  overflow: visible;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   background-color: #fff;
-  height: 100%;
+  padding-top: 0;
+  min-height: auto;
   padding: 16px;
 
   h2 {
@@ -50,4 +63,14 @@
 
 .ads {
   margin-top: 20px;
+}
+
+.restaurants {
+  margin-top: 45px;
+  .restaurantsHeader {
+    margin-bottom: 16px;
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+  }
 }

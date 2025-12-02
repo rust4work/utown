@@ -1,18 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ClientHome.module.scss";
+import { useNavigateTo } from "../../../../hooks/useNavigateTo";
+//components
 import Logo from "../../../../components/Logo/Logo";
-import bell from "../../../../assets/images/icons/bell.svg";
 import WeatherCard from "../../../../components/WeatherCard/WeatherCard";
 import ActiveOrders from "../../../../components/ActiveOrders/ActiveOrders";
 import Features from "../../../../components/Features/Features";
 import Greeting from "../../../../components/Greeting/Greeting";
 import { CardSlider } from "../../../../components/Slider/CardSlider";
 import { Card, CustomCard } from "../../../../components/Slider/Card";
+import { CardMore } from "../../../../components/Slider/CardMore";
+import CardRestaurants from "../../../../components/Slider/CardRestaurants";
+//images
+import bell from "../../../../assets/images/icons/bell.svg";
 import ad1 from "../../../../assets/images/ads/Ad-1.svg";
 import ad2 from "../../../../assets/images/ads/Ad-2.svg";
-import { CardMore } from "../../../../components/Slider/CardMore";
 
 function ClientHome() {
+  const { navigateTo } = useNavigateTo();
+  const [restaurants, setRestaurants] = useState<any[]>([]);
+  useEffect(() => {
+    fetch("https://utown-api.habsida.net/api/public/restaurants")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("API RESPONSE:", data);
+        setRestaurants(data.content); // <-- вот это важно
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className={styles.container}>
       <header className={styles.headerContainer}>
@@ -36,6 +52,7 @@ function ClientHome() {
         <div className={styles.features}>
           <Features typeOfTab="grid" />
         </div>
+        {/* ------ ADS --------*/}
         <div className={styles.ads}>
           <CardSlider
             cards={[
@@ -46,6 +63,29 @@ function ClientHome() {
             ]}
           />
         </div>
+        {/* ------ RESTAURANTS --------*/}
+        <div className={styles.restaurants}>
+          <div className={styles.restaurantsHeader}>
+            <h3>Food Delivery</h3>
+            <button>More</button>
+          </div>
+          {restaurants.length > 0 && (
+            <CardSlider
+              cards={restaurants.map((r) => (
+                <CardRestaurants
+                  key={r.id}
+                  title={r.title}
+                  image={
+                    r.imageUrl ||
+                    "https://static.vecteezy.com/system/resources/previews/020/398/609/non_2x/restaurant-building-with-flat-style-isolated-on-white-background-vector.jpg"
+                  }
+                  description={r.description}
+                  deliveryTime={r.deliveryTime}
+                />
+              ))}
+            />
+          )}
+        </div>{" "}
       </main>
     </div>
   );
