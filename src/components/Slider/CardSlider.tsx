@@ -12,7 +12,7 @@ export function CardSlider({
   onMoreClick?: () => void;
 }) {
   return (
-    <Swiper slidesPerView={2.2} spaceBetween={20} grabCursor={true}>
+    <Swiper slidesPerView={2} spaceBetween={45} grabCursor={true}>
       {cards.map((card, i) => (
         <SwiperSlide key={i}>{card}</SwiperSlide>
       ))}

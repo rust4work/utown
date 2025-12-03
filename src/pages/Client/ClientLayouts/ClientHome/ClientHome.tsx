@@ -59,7 +59,6 @@ function ClientHome() {
               <Card title="" image={ad1} />,
               <Card title="" image={ad2} />,
               <CustomCard />,
-              <CardMore onClick={() => console.log("clicked")} />,
             ]}
           />
         </div>
