@@ -1,0 +1,44 @@
+.container {
+  border-radius: 16px;
+  width: 2235px;
+  height: 95px;
+  background-color: #f5f5f5;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  :hover {
+    cursor: default;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  h3 {
+    font-size: 30px;
+    font-weight: 400;
+  }
+}
+.weatherFooter {
+  display: flex;
+  align-items: center;
+  p {
+    margin-right: 50px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+
+.weatherLowest {
+  text-align: top;
+  :hover {
+    cursor: pointer;
+  }
+}

@@ -39,7 +39,7 @@ function LoginPage() {
       sessionStorage.setItem("refreshToken", response.refreshToken);
       navigateTo("/client")();
     } catch (err: any) {
-      setError("");
+      setError("Invalid phone number or password");
       setLoading(false);
     }
   };
