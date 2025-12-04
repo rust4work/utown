@@ -23,7 +23,6 @@ function ClientHome() {
     fetch("https://utown-api.habsida.net/api/public/restaurants")
       .then((res) => res.json())
       .then((data) => {
-        console.log("API RESPONSE:", data);
         setRestaurants(data.content); // <-- вот это важно
       })
       .catch((err) => console.log(err));
@@ -70,21 +69,23 @@ function ClientHome() {
           </div>
           {restaurants.length > 0 && (
             <CardSlider
-              cards={restaurants.map((r) => (
-                <CardRestaurants
-                  key={r.id}
-                  title={r.title}
-                  image={
-                    r.imageUrl ||
-                    "https://static.vecteezy.com/system/resources/previews/020/398/609/non_2x/restaurant-building-with-flat-style-isolated-on-white-background-vector.jpg"
-                  }
-                  description={r.description}
-                  deliveryTime={r.deliveryTime}
-                />
-              ))}
+              cards={restaurants
+                .filter((r) => r.isActive)
+                .map((r) => (
+                  <CardRestaurants
+                    key={r.id}
+                    title={r.title}
+                    image={
+                      r.imageUrl ||
+                      "https://static.vecteezy.com/system/resources/previews/020/398/609/non_2x/restaurant-building-with-flat-style-isolated-on-white-background-vector.jpg"
+                    }
+                    description={r.description}
+                    deliveryTime={r.deliveryTime}
+                  />
+                ))}
             />
           )}
-        </div>{" "}
+        </div>
       </main>
     </div>
   );

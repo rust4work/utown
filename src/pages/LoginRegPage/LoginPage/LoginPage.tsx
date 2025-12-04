@@ -37,6 +37,13 @@ function LoginPage() {
       const response = await login(data.phoneNumber, data.password);
       sessionStorage.setItem("token", response.token);
       sessionStorage.setItem("refreshToken", response.refreshToken);
+
+      const userData = {
+        fullName: response.user.fullName,
+        defaultAddress: response.user.defaultAddress,
+      };
+
+      sessionStorage.setItem("user", JSON.stringify(userData));
       navigateTo("/client")();
     } catch (err: any) {
       setError("Invalid phone number or password");

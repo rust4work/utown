@@ -28,7 +28,7 @@ import Contact from "../pages/Client/ClientLayouts/ClientProfile/Contact/Contact
 import EditInfo from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditInfo";
 import EditPassword from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditPassword";
 import UtFood from "../pages/UTFood/UtFood";
-import Establishments from "../pages/UTFood/Establishments/Establishments";
+import Establishments from "../pages/UTFood/FoodHome/Establishments/Establishments";
 import FoodHome from "../pages/UTFood/FoodHome/FoodHome";
 
 const router = createBrowserRouter(

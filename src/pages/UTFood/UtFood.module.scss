@@ -1,5 +1,6 @@
 .container {
   min-height: 100vh;
+  background-color: #897dd3;
 }
 
 .header {
@@ -9,4 +10,7 @@
   justify-content: space-between;
   padding-right: 16px;
   padding-top: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
