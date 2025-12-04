@@ -66,7 +66,7 @@ function ClientHome() {
         <div className={styles.restaurants}>
           <div className={styles.restaurantsHeader}>
             <h3>Food Delivery</h3>
-            <button>More</button>
+            <button onClick={navigateTo("/food")}>More</button>
           </div>
           {restaurants.length > 0 && (
             <CardSlider
