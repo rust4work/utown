@@ -3,6 +3,13 @@ import styles from "./FoodHome.module.scss";
 import map from "../../../assets/images/icons/map.svg";
 import Input from "../../../components/Input/Input";
 import searchNormal from "../../../assets/images/icons/search-normal.svg";
+import { CardSwitcher } from "../../../components/Slider/CardSwitcher";
+import CardRestaurants from "../../../components/Slider/CardRestaurants";
+import { AdBig, CustomCard } from "../../../components/Slider/Card";
+import ad1 from "../../../assets/images/ads/Ad-1.svg";
+import ad2 from "../../../assets/images/ads/Ad-2.svg";
+import ad3 from "../../../assets/images/ads/coffe.png";
+import ad4 from "../../../assets/images/ads/bgc.png";
 
 function FoodHome() {
   const { navigateTo } = useNavigateTo();
@@ -29,7 +36,21 @@ function FoodHome() {
           }}
         />
       </div>
-      <div>advertisement</div>
+      <div>
+        <CardSwitcher
+          items={[
+            <AdBig title="" image={ad1} />,
+            <AdBig title="" image={ad2} />,
+            <AdBig
+              title="Delicious coffee"
+              description="Short promotional text -20% on everything"
+              image={ad3}
+            />,
+          ]}
+          autoplay={true}
+          delay={3000}
+        />
+      </div>
       <div>
         <h3>categories</h3>
       </div>

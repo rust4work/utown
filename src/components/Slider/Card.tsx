@@ -24,3 +24,32 @@ export function CustomCard() {
     </div>
   );
 }
+
+export function AdBig({
+  title,
+  image,
+  description,
+}: {
+  title?: string;
+  image: string;
+  description?: string;
+}) {
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        width: "95%",
+        height: "260px",
+        borderRadius: "12px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <h4 style={{ color: "white", paddingLeft: "16px" }}>{title}</h4>
+      <p style={{ color: "white" }}>{description}</p>
+    </div>
+  );
+}

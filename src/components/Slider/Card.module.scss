@@ -81,3 +81,15 @@
     }
   }
 }
+
+.loopCardSliderWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.cardSwitcherPagination {
+  margin-top: 12px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+}
