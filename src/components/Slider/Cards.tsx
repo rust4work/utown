@@ -53,3 +53,21 @@ export function AdBig({
     </div>
   );
 }
+
+export function CategoriesCard({
+  image,
+  title,
+  amount,
+}: {
+  image: string;
+  title: string;
+  amount: number;
+}) {
+  return (
+    <div className={styles.categoriesCard}>
+      <img src={image} alt="" />
+      <h3>{title}</h3>
+      <p>{amount} establishments</p>
+    </div>
+  );
+}

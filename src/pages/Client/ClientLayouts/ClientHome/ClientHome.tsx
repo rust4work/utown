@@ -8,7 +8,7 @@ import ActiveOrders from "../../../../components/ActiveOrders/ActiveOrders";
 import Features from "../../../../components/Features/Features";
 import Greeting from "../../../../components/Greeting/Greeting";
 import { CardSlider } from "../../../../components/Slider/CardSlider";
-import { Card, CustomCard } from "../../../../components/Slider/Card";
+import { Card, CustomCard } from "../../../../components/Slider/Cards";
 import { CardMore } from "../../../../components/Slider/CardMore";
 import CardRestaurants from "../../../../components/Slider/CardRestaurants";
 //images

@@ -1,19 +1,40 @@
+import { useState, useEffect } from "react";
+
 import { useNavigateTo } from "../../../hooks/useNavigateTo";
 import styles from "./FoodHome.module.scss";
 import map from "../../../assets/images/icons/map.svg";
 import Input from "../../../components/Input/Input";
 import searchNormal from "../../../assets/images/icons/search-normal.svg";
-import { CardSwitcher } from "../../../components/Slider/CardSwitcher";
+import { CardSwitcher } from "../../../components/Slider/CardSwitcherAd";
+import { CardSlider } from "../../../components/Slider/CardSlider";
 import CardRestaurants from "../../../components/Slider/CardRestaurants";
-import { AdBig, CustomCard } from "../../../components/Slider/Card";
+import { AdBig, CategoriesCard } from "../../../components/Slider/Cards";
 import ad1 from "../../../assets/images/ads/Ad-1.svg";
 import ad2 from "../../../assets/images/ads/Ad-2.svg";
 import ad3 from "../../../assets/images/ads/coffe.png";
-import ad4 from "../../../assets/images/ads/bgc.png";
+import { set } from "react-hook-form";
+import { Spin } from "antd";
 
 function FoodHome() {
   const { navigateTo } = useNavigateTo();
   const userAddress = JSON.parse(sessionStorage.getItem("user") || "{}");
+  const [categories, setCategories] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  useEffect(() => {
+    setLoading(true);
+    fetch("https://utown-api.habsida.net/api/categories", {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCategories(data?.content ?? []);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.address}>
@@ -36,7 +57,7 @@ function FoodHome() {
           }}
         />
       </div>
-      <div>
+      <div className={styles.adsSection}>
         <CardSwitcher
           items={[
             <AdBig title="" image={ad1} />,
@@ -51,12 +72,31 @@ function FoodHome() {
           delay={3000}
         />
       </div>
-      <div>
-        <h3>categories</h3>
+      <div className={styles.categoriesSection}>
+        <h2>Categories</h2>
+        {loading && (
+          <div className={styles.spinner}>
+            <Spin />
+          </div>
+        )}
+        {categories.length > 0 && (
+          <CardSlider
+            cards={categories
+              .filter((c) => c.isActive)
+              .map((c) => (
+                <CategoriesCard
+                  key={c.id}
+                  title={c.name}
+                  image={c.imageUrl}
+                  amount={c.sort}
+                />
+              ))}
+            spaceBetween={10}
+            slidesPerView={2.5}
+          />
+        )}
       </div>
-      <div>
-        <h3 onClick={navigateTo("establishments")}>establishments</h3>
-      </div>
+      <div></div>
       <div>
         <h3>fastest delivery</h3>
       </div>

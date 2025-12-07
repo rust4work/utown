@@ -21,3 +21,21 @@
   margin-top: 10px;
   margin-bottom: 16px;
 }
+
+.categoriesSection {
+  margin-top: 16px;
+  margin-bottom: 32px;
+  height: 234px;
+  width: 100%;
+  h2 {
+    margin: 16px 0;
+    font-weight: 500;
+  }
+}
+
+.spinner {
+  height: 100%;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}
