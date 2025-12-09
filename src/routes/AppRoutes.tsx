@@ -27,6 +27,7 @@ import Information from "../pages/Client/ClientLayouts/ClientProfile/Information
 import Contact from "../pages/Client/ClientLayouts/ClientProfile/Contact/Contact";
 import EditInfo from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditInfo";
 import EditPassword from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditPassword";
+import AdminLoginPage from "../pages/Admin/AdminLoginPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,7 +57,7 @@ const router = createBrowserRouter(
 
         {/* ADMIN */}
         <Route path="/admin" element={<AdminDashboard />} />
-
+        <Route path="/admin/login" element={<AdminLoginPage />} />
         {/* RESTAURATEUR */}
         <Route path="/restaurateur" element={<ReastaraunterDashboard />} />
       </Route>
