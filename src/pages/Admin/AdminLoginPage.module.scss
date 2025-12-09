@@ -1,0 +1,83 @@
+.page {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background: #f2f3f7;
+}
+
+
+/* Левая панель с логотипом и описанием */
+
+.leftPanel {
+    flex: 0 0 40%;
+    padding: 40px 48px;
+    background: linear-gradient(90deg, #1e8bf3 0%, #8148f6 100%);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+
+/* Правая панель с формой */
+
+.rightPanel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f2f3f7;
+}
+
+.form {
+    width: 360px;
+    padding: 32px 40px;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formTitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.label {
+    font-size: 14px;
+    color: #656b80;
+}
+
+.error {
+    font-size: 12px;
+    color: #b50000;
+}
+
+.globalError {
+    font-size: 14px;
+    color: #b50000;
+}
+
+.submitButton {
+    margin-top: 8px;
+}
