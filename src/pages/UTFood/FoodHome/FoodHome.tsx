@@ -14,11 +14,13 @@ import ad2 from "../../../assets/images/ads/Ad-2.svg";
 import ad3 from "../../../assets/images/ads/coffe.png";
 import { set } from "react-hook-form";
 import { Spin } from "antd";
+import ButtonMore from "../../../components/ButtonMore/ButtonMore";
 
 function FoodHome() {
   const { navigateTo } = useNavigateTo();
   const userAddress = JSON.parse(sessionStorage.getItem("user") || "{}");
   const [categories, setCategories] = useState<any[]>([]);
+  const [restaurants, setRestaurants] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     setLoading(true);
@@ -30,6 +32,16 @@ function FoodHome() {
       .then((res) => res.json())
       .then((data) => {
         setCategories(data?.content ?? []);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
+    setLoading(true);
+    fetch("https://utown-api.habsida.net/api/public/restaurants")
+      .then((res) => res.json())
+      .then((data) => {
+        setRestaurants(data.content);
         setLoading(false);
       })
       .catch((err) => console.log(err));
@@ -57,6 +69,7 @@ function FoodHome() {
           }}
         />
       </div>
+      {/*----------   AD ----------*/}
       <div className={styles.adsSection}>
         <CardSwitcher
           items={[
@@ -72,6 +85,7 @@ function FoodHome() {
           delay={3000}
         />
       </div>
+      {/*----------   CATEGORIES ----------*/}
       <div className={styles.categoriesSection}>
         <h2>Categories</h2>
         {loading && (
@@ -79,6 +93,7 @@ function FoodHome() {
             <Spin />
           </div>
         )}
+        {categories.length === 0 && !loading && <p>No categories available</p>}
         {categories.length > 0 && (
           <CardSlider
             cards={categories
@@ -96,7 +111,37 @@ function FoodHome() {
           />
         )}
       </div>
-      <div></div>
+      {/*----------   ESTABLISHMENTS AKA RESTAURANTS ----------*/}
+      <div className={styles.establishmentsSection}>
+        <div className={styles.establishmentsHeader}>
+          <h4>Establishments</h4>
+          <ButtonMore path="establishments" />
+        </div>
+
+        {loading && (
+          <div className={styles.spinner}>
+            <Spin />
+          </div>
+        )}
+        {restaurants.length > 0 && (
+          <CardSlider
+            cards={restaurants
+              .filter((r) => r.isActive)
+              .map((r) => (
+                <CardRestaurants
+                  key={r.id}
+                  title={r.title}
+                  image={
+                    r.imageUrl ||
+                    "https://static.vecteezy.com/system/resources/previews/020/398/609/non_2x/restaurant-building-with-flat-style-isolated-on-white-background-vector.jpg"
+                  }
+                  description={r.description}
+                  deliveryTime={r.deliveryTime}
+                />
+              ))}
+          />
+        )}
+      </div>
       <div>
         <h3>fastest delivery</h3>
       </div>

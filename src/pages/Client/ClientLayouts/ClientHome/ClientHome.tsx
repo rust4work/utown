@@ -15,15 +15,20 @@ import CardRestaurants from "../../../../components/Slider/CardRestaurants";
 import bell from "../../../../assets/images/icons/bell.svg";
 import ad1 from "../../../../assets/images/ads/Ad-1.svg";
 import ad2 from "../../../../assets/images/ads/Ad-2.svg";
+import { set } from "react-hook-form";
+import { Spin } from "antd";
 
 function ClientHome() {
   const { navigateTo } = useNavigateTo();
   const [restaurants, setRestaurants] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
+    setLoading(true);
     fetch("https://utown-api.habsida.net/api/public/restaurants")
       .then((res) => res.json())
       .then((data) => {
-        setRestaurants(data.content); // <-- вот это важно
+        setRestaurants(data.content);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -67,6 +72,11 @@ function ClientHome() {
             <h3>Food Delivery</h3>
             <button onClick={navigateTo("/food")}>More</button>
           </div>
+          {loading && (
+            <div className={styles.spinner}>
+              <Spin />
+            </div>
+          )}
           {restaurants.length > 0 && (
             <CardSlider
               cards={restaurants
