@@ -22,6 +22,7 @@ function FoodHome() {
   const [categories, setCategories] = useState<any[]>([]);
   const [restaurants, setRestaurants] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
   useEffect(() => {
     setLoading(true);
     fetch("https://utown-api.habsida.net/api/categories", {
@@ -58,6 +59,8 @@ function FoodHome() {
       </div>
       <div className={styles.searchBar}>
         <Input
+          onFocus={() => setIsSearching(true)}
+          onBlur={() => setIsSearching(false)}
           icon={<img src={searchNormal} alt="" />}
           type="text"
           placeholder="Search for cafes, restaraunts and dishes"
@@ -69,85 +72,100 @@ function FoodHome() {
           }}
         />
       </div>
-      {/*----------   AD ----------*/}
-      <div className={styles.adsSection}>
-        <CardSwitcher
-          items={[
-            <AdBig title="" image={ad1} />,
-            <AdBig title="" image={ad2} />,
-            <AdBig
-              title="Delicious coffee"
-              description="Short promotional text -20% on everything"
-              image={ad3}
-            />,
-          ]}
-          autoplay={true}
-          delay={3000}
-        />
-      </div>
-      {/*----------   CATEGORIES ----------*/}
-      <div className={styles.categoriesSection}>
-        <h2>Categories</h2>
-        {loading && (
-          <div className={styles.spinner}>
-            <Spin />
-          </div>
-        )}
-        {categories.length === 0 && !loading && <p>No categories available</p>}
-        {categories.length > 0 && (
-          <CardSlider
-            cards={categories
-              .filter((c) => c.isActive)
-              .map((c) => (
-                <CategoriesCard
-                  key={c.id}
-                  title={c.name}
-                  image={c.imageUrl}
-                  amount={c.sort}
-                />
-              ))}
-            spaceBetween={10}
-            slidesPerView={2.5}
-          />
-        )}
-      </div>
-      {/*----------   ESTABLISHMENTS AKA RESTAURANTS ----------*/}
-      <div className={styles.establishmentsSection}>
-        <div className={styles.establishmentsHeader}>
-          <h4>Establishments</h4>
-          <ButtonMore path="establishments" />
+      {isSearching && (
+        <div className={styles.overlay}>
+          <h2>
+            What shall we <br />
+            search for?
+          </h2>
         </div>
+      )}
+      {!isSearching && (
+        <>
+          {/*----------   AD ----------*/}
 
-        {loading && (
-          <div className={styles.spinner}>
-            <Spin />
+          <div className={styles.adsSection}>
+            <CardSwitcher
+              items={[
+                <AdBig title="" image={ad1} />,
+                <AdBig title="" image={ad2} />,
+                <AdBig
+                  title="Delicious coffee"
+                  description="Short promotional text -20% on everything"
+                  image={ad3}
+                />,
+              ]}
+              autoplay={true}
+              delay={3000}
+            />
           </div>
-        )}
-        {restaurants.length > 0 && (
-          <CardSlider
-            cards={restaurants
-              .filter((r) => r.isActive)
-              .map((r) => (
-                <CardRestaurants
-                  key={r.id}
-                  title={r.title}
-                  image={
-                    r.imageUrl ||
-                    "https://static.vecteezy.com/system/resources/previews/020/398/609/non_2x/restaurant-building-with-flat-style-isolated-on-white-background-vector.jpg"
-                  }
-                  description={r.description}
-                  deliveryTime={r.deliveryTime}
-                />
-              ))}
-          />
-        )}
-      </div>
-      <div>
-        <h3>fastest delivery</h3>
-      </div>
-      <div>
-        <h3>fastest delivery</h3>
-      </div>
+          {/*----------   CATEGORIES ----------*/}
+          <div className={styles.categoriesSection}>
+            <h2>Categories</h2>
+            {loading && (
+              <div className={styles.spinner}>
+                <Spin />
+              </div>
+            )}
+            {categories.length === 0 && !loading && (
+              <p>No categories available</p>
+            )}
+            {categories.length > 0 && (
+              <CardSlider
+                cards={categories
+                  .filter((c) => c.isActive)
+                  .map((c) => (
+                    <CategoriesCard
+                      key={c.id}
+                      title={c.name}
+                      image={c.imageUrl}
+                      amount={c.sort}
+                    />
+                  ))}
+                spaceBetween={10}
+                slidesPerView={2.5}
+              />
+            )}
+          </div>
+          {/*----------   ESTABLISHMENTS AKA RESTAURANTS ----------*/}
+          <div className={styles.establishmentsSection}>
+            <div className={styles.establishmentsHeader}>
+              <h4>Establishments</h4>
+              <ButtonMore path="establishments" />
+            </div>
+
+            {loading && (
+              <div className={styles.spinner}>
+                <Spin />
+              </div>
+            )}
+            {restaurants.length > 0 && (
+              <CardSlider
+                cards={restaurants
+                  .filter((r) => r.isActive)
+                  .map((r) => (
+                    <CardRestaurants
+                      key={r.id}
+                      title={r.title}
+                      image={
+                        r.imageUrl ||
+                        "https://static.vecteezy.com/system/resources/previews/020/398/609/non_2x/restaurant-building-with-flat-style-isolated-on-white-background-vector.jpg"
+                      }
+                      description={r.description}
+                      deliveryTime={r.deliveryTime}
+                    />
+                  ))}
+              />
+            )}
+          </div>
+          <div>
+            <h3>fastest delivery</h3>
+          </div>
+          <div>
+            <h3>fastest delivery</h3>
+          </div>
+        </>
+      )}
     </div>
   );
 }
