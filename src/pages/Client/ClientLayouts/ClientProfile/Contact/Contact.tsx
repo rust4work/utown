@@ -38,7 +38,7 @@ function Contact() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>To contact us find @ripmywhite on Telegram</p>
+        <p>To contact us find @someuser on Telegram</p>
         <p>Or call the number mentioned in the description of that user</p>
       </Modal>
     </div>
