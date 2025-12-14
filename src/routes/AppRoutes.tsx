@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import ProtectedRoute from "./ProtectedRoutes"; // новее
+import ProtectedRoute from "./ProtectedRoutes";
 import { UserProvider } from "../utils/UserContext";
 
 // Pages
@@ -15,10 +15,9 @@ import LoginRegPage from "../pages/LoginRegPage/LoginRegPage";
 import LoginPage from "../pages/LoginRegPage/LoginPage/LoginPage";
 import RegisterPage from "../pages/LoginRegPage/RegisterPage/RegisterPage";
 import RecoverPasswordPage from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/RecoverPasswordPage";
-import ClientDashboard from "../pages/Client/ClientDashboard";
-import AdminDashboard from "../pages/Admin/AdminDashboard";
-import ReastaraunterDashboard from "../pages/Restaurateur/RestaurateurDashboard";
 import Verification from "../pages/LoginRegPage/RegisterPage/Verification/Verification";
+
+import ClientDashboard from "../pages/Client/ClientDashboard";
 import ClientHome from "../pages/Client/ClientLayouts/ClientHome/ClientHome";
 import ClientFavourites from "../pages/Client/ClientLayouts/ClientFavourites/ClientFavourites";
 import ClientProfile from "../pages/Client/ClientLayouts/ClientProfile/ClientProfile";
@@ -31,6 +30,11 @@ import UtFood from "../pages/UTFood/UtFood";
 import Establishments from "../pages/UTFood/FoodHome/Establishments/Establishments";
 import FoodHome from "../pages/UTFood/FoodHome/FoodHome";
 
+import AdminDashboard from "../pages/Admin/AdminDashboard";
+import AdminLoginPage from "../pages/Admin/AdminLoginPage";
+
+import ReastaraunterDashboard from "../pages/Restaurateur/RestaurateurDashboard";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -41,15 +45,17 @@ const router = createBrowserRouter(
       <Route path="/verification" element={<Verification />} />
       <Route path="/recover-password" element={<RecoverPasswordPage />} />
 
+      {/* Admin login MUST be public */}
+      <Route path="/admin/login" element={<AdminLoginPage />} />
+
       {/* Protected */}
       <Route element={<ProtectedRoute />}>
+        {/* CLIENT */}
         <Route path="/client" element={<ClientDashboard />}>
           <Route index element={<Navigate to="home" replace />} />
-          {/*Footer navigation*/}
           <Route path="home" element={<ClientHome />} />
           <Route path="favourites" element={<ClientFavourites />} />
           <Route path="profile" element={<ClientProfile />} />
-          {/* PROFILE LAYOUT */}
           <Route path="profile/account" element={<Account />} />
           <Route path="profile/edit" element={<EditInfo />} />
           <Route path="profile/edit/password" element={<EditPassword />} />

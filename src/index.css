@@ -1,21 +1,28 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 body {
+<<<<<<< HEAD
   margin: 0;
 
   height: 150%;
+=======
+    margin: 0;
+    background-image: url("/src/assets/images/background.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    /* фон будет скролиться */
+    height: 150%;
+>>>>>>> dev
 }
 
 * {
@@ -25,6 +32,7 @@ body {
 }
 
 #root {
+<<<<<<< HEAD
   height: 100%;
   width: 100%;
   margin: 0 auto;
@@ -33,3 +41,10 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
 }
+=======
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+}
+>>>>>>> dev

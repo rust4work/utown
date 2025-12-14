@@ -1,3 +1,5 @@
+import { api } from "./axios/axios";
+
 export interface RegisterPayload {
   username: string;
   password: string;
@@ -21,32 +23,25 @@ export interface RegisterResponse {
   token: string;
   refreshToken: string;
   user: {
-    id: 0;
+    id: number;
     username: string;
     fullName: string;
     isActive: boolean;
     defaultAddress: number;
-    roles: [string];
+    roles: string[];
     createdAt: string;
     updatedAt: string;
   };
 }
 
-const API_URL = "/api/auth";
+export async function fetchUserProfile(): Promise<UserProfile> {
+  const response = await api.get<UserProfile>("/users/profile");
+  return response.data;
+}
 
 export async function registerUser(
   data: RegisterPayload
 ): Promise<RegisterResponse> {
-  const response = await fetch(`${API_URL}/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-
-  if (!response.ok) {
-    console.error("SERVER RESPONSE:", await response.text());
-    throw new Error("Registration failed");
-  }
-
-  return response.json();
+  const response = await api.post<RegisterResponse>("/auth/register", data);
+  return response.data;
 }
