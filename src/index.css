@@ -14,10 +14,7 @@ code {
 
 body {
   margin: 0;
-  background-image: url("/src/assets/images/background.svg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll; /* фон будет скролиться */
+
   height: 150%;
 }
 
@@ -29,7 +26,10 @@ body {
 
 #root {
   height: 100%;
-  width: 428px;
+  width: 100%;
   margin: 0 auto;
-  background-color: #fff;
+  background-image: url("/src/assets/images/background.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }
