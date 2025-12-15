@@ -1,7 +1,5 @@
-import { useUser } from "../../utils/UserContext";
-
 function Greeting() {
-  const { user } = useUser();
+  const user = JSON.parse(sessionStorage.getItem("user") || "{}");
 
   return (
     <div>

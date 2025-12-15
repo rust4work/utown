@@ -1,0 +1,18 @@
+.container {
+  min-height: 100vh;
+  background-color: #897dd3;
+  width: 428px;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #897dd3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 16px;
+  padding-top: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}

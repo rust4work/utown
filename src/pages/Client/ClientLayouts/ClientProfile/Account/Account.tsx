@@ -15,6 +15,7 @@ import HeaderDark from "../../../../../components/HeaderDark/HeaderDark";
 function Account() {
   const { navigateTo } = useNavigateTo();
   const [showModal, setShowModal] = useState(false);
+  const user = JSON.parse(sessionStorage.getItem("user") || "{}");
 
   const handleDelete = async () => {
     try {
@@ -52,7 +53,7 @@ function Account() {
         <div className={styles.info}>
           <img src={profilePic} alt="" />
 
-          <p>Name</p>
+          <p>{user.fullName || "Username"}</p>
         </div>
         <div className={styles.edit}>
           <button

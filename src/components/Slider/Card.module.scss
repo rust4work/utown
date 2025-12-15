@@ -81,3 +81,39 @@
     }
   }
 }
+
+.loopCardSliderWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.cardSwitcherPagination {
+  margin-top: 12px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.categoriesCard {
+  cursor: pointer;
+  height: 190px;
+  width: 140px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  img {
+    width: 140px;
+    height: 126px;
+    object-fit: cover;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 9px 13px;
+  }
+  p {
+    margin-left: 13px;
+    color: #808080;
+    font-size: 12px;
+  }
+}

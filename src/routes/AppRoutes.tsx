@@ -26,6 +26,9 @@ import Information from "../pages/Client/ClientLayouts/ClientProfile/Information
 import Contact from "../pages/Client/ClientLayouts/ClientProfile/Contact/Contact";
 import EditInfo from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditInfo";
 import EditPassword from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditPassword";
+import UtFood from "../pages/UTFood/UtFood";
+import Establishments from "../pages/UTFood/FoodHome/Establishments/Establishments";
+import FoodHome from "../pages/UTFood/FoodHome/FoodHome";
 
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import AdminLoginPage from "../pages/Admin/AdminLoginPage";
@@ -58,6 +61,11 @@ const router = createBrowserRouter(
           <Route path="profile/edit/password" element={<EditPassword />} />
           <Route path="profile/information" element={<Information />} />
           <Route path="profile/contact" element={<Contact />} />
+        </Route>
+        {/*---UTFOOD PAGE*/}
+        <Route path="food" element={<UtFood />}>
+          <Route index element={<FoodHome />} />
+          <Route path="establishments" element={<Establishments />} />
         </Route>
 
         {/* ADMIN */}
