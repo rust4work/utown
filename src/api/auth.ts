@@ -45,3 +45,12 @@ export async function registerUser(
   const response = await api.post<RegisterResponse>("/auth/register", data);
   return response.data;
 }
+
+export interface ResetPasswordPayload {
+  username: string;
+  code: string;
+  newPassword: string;
+}
+export async function resetPassword(data: ResetPasswordPayload): Promise<void> {
+  await api.post("/auth/password/reset", data);
+}

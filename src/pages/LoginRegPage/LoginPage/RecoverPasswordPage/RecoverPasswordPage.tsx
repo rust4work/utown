@@ -4,8 +4,11 @@ import Input from "../../../../components/Input/Input";
 import style from "./RecoverPassword.module.scss";
 import call from "../../../../assets/images/icons/call.svg";
 import { useForm } from "react-hook-form";
+import { useNavigateTo } from "../../../../hooks/useNavigateTo";
 
 function RecoverPasswordPage() {
+  const { navigateTo } = useNavigateTo();
+
   const {
     register,
     handleSubmit,
@@ -15,7 +18,7 @@ function RecoverPasswordPage() {
   });
 
   const onSubmit = (data: { phoneNumber: string }) => {
-    console.log("Recover password for phone number:", data.phoneNumber);
+    navigateTo("/recover-verification", { username: data.phoneNumber })();
   };
   return (
     <div className={style.container}>
@@ -47,7 +50,11 @@ function RecoverPasswordPage() {
           {errors.phoneNumber && (
             <p className={style.error}>{errors.phoneNumber.message}</p>
           )}
-          <Button type="submit" typeOfButton="secondary">
+          <Button
+            type="submit"
+            typeOfButton="secondary"
+            onClick={navigateTo("/recover-verification")}
+          >
             Reset password
           </Button>
         </form>
