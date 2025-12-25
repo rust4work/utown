@@ -34,13 +34,13 @@ function NewPassword() {
     try {
       console.log({
         username: state.username,
-        code: state.code,
+        code: "123456",
         newPassword: data.newPassword,
       });
 
       await resetPassword({
         username: state.username,
-        code: state.code,
+        code: "123456",
         newPassword: data.newPassword,
       });
 
@@ -50,6 +50,7 @@ function NewPassword() {
       );
     } catch (error: any) {
       const code = error.response?.data?.code;
+      alert(error.response?.data?.message || "Unknown error");
       // axios error
       if (code === "WRONG_OLD_PASSWORD") {
         setError("confirmPassword", {

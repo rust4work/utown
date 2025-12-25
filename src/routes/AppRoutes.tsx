@@ -36,6 +36,7 @@ import AdminLoginPage from "../pages/Admin/AdminLoginPage";
 import ReastaraunterDashboard from "../pages/Restaurateur/RestaurateurDashboard";
 import RecoverVerification from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/RecoverVerification/RecoverVerification";
 import NewPassword from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/NewPassword/NewPassword";
+import RestaurantDetails from "../pages/UTFood/FoodHome/Establishments/RestaurantsDetails/RestaurantsDetail";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -70,6 +71,7 @@ const router = createBrowserRouter(
         <Route path="food" element={<UtFood />}>
           <Route index element={<FoodHome />} />
           <Route path="establishments" element={<Establishments />} />
+          <Route path="establishments/:id" element={<RestaurantDetails />} />
         </Route>
 
         {/* ADMIN */}

@@ -1,0 +1,11 @@
+.address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 22px;
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}

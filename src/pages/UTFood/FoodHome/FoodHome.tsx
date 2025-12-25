@@ -15,10 +15,11 @@ import ad3 from "../../../assets/images/ads/coffe.png";
 import { set } from "react-hook-form";
 import { Spin } from "antd";
 import ButtonMore from "../../../components/ButtonMore/ButtonMore";
+import Address from "../../../components/Address/Address";
 
 function FoodHome() {
   const { navigateTo } = useNavigateTo();
-  const userAddress = JSON.parse(sessionStorage.getItem("user") || "{}");
+
   const [categories, setCategories] = useState<any[]>([]);
   const [restaurants, setRestaurants] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -50,13 +51,7 @@ function FoodHome() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.address}>
-        <img src={map} alt="" />
-        <p>
-          {userAddress.fullName ?? "Unknown user"} lives at{" "}
-          {userAddress.defaultAddress ?? "no address"}
-        </p>
-      </div>
+      <Address />
       <div className={styles.searchBar}>
         <Input
           onFocus={() => setIsSearching(true)}
