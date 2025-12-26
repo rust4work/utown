@@ -30,15 +30,3 @@
 .icon img {
   transition: filter 0.2s ease, transform 0.2s ease;
 }
-
-/* обычное состояние */
-.icon img {
-  filter: brightness(0); // чёрное
-}
-
-/* по клику */
-.active img {
-  filter: invert(16%) sepia(92%) saturate(7463%) hue-rotate(358deg)
-    brightness(97%) contrast(119%);
-  transform: scale(1.1);
-}
