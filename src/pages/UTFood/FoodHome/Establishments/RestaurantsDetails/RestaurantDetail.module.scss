@@ -1,0 +1,132 @@
+.container {
+  background-color: #fff;
+  min-height: 100vh;
+  width: 428px;
+  padding: 12px;
+}
+// RestaurantDetail.module.scss
+.header {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+}
+
+.headerContent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #333;
+}
+
+.infoCard {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+  background: rgba(255, 255, 255);
+  backdrop-filter: blur(10px);
+  padding: 0 16px;
+  border-radius: 8px;
+  height: 44px;
+  font-weight: 500;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.value {
+  font-size: 14px;
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  height: 44px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  &:first-child {
+    background: white;
+    color: #333;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  span {
+    font-size: 20px;
+  }
+}
+
+.infoContainer {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.deliveryTime,
+.minOrder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.categories {
+  margin-top: 16px;
+  margin-bottom: 32px;
+  min-height: 234px;
+  min-width: 100%;
+
+  h2 {
+    margin: 16px 0;
+    font-weight: 500;
+    width: 100%;
+  }
+}

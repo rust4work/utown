@@ -14,3 +14,9 @@
   margin-top: 16px;
   margin-bottom: 16px;
 }
+
+.establishments {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}

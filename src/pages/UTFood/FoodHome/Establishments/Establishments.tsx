@@ -12,7 +12,6 @@ function Establishments() {
       );
       const establishments = await res.json();
       setEstablishments(establishments.content);
-      console.log(establishments);
     };
 
     fetchEstablishments();

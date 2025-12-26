@@ -1,0 +1,44 @@
+.btn {
+  height: 44px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: rgb(255, 255, 255);
+  backdrop-filter: blur(10px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:first-child {
+    background: white;
+    color: #333;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  span {
+    font-size: 20px;
+  }
+}
+
+.icon img {
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+/* обычное состояние */
+.icon img {
+  filter: brightness(0); // чёрное
+}
+
+/* по клику */
+.active img {
+  filter: invert(16%) sepia(92%) saturate(7463%) hue-rotate(358deg)
+    brightness(97%) contrast(119%);
+  transform: scale(1.1);
+}
