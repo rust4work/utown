@@ -148,6 +148,7 @@ function FoodHome() {
                       }
                       description={r.description}
                       deliveryTime={r.deliveryTime}
+                      onClick={navigateTo(`/food/establishments/${r.id}`)}
                     />
                   ))}
               />

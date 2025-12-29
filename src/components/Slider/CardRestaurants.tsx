@@ -7,14 +7,16 @@ function CardRestaurants({
   image,
   deliveryTime,
   description,
+  onClick,
 }: {
   title: string;
   image: string;
   deliveryTime: string;
   description: string;
+  onClick?: () => void;
 }) {
   return (
-    <div className={styles.restaurantsWrapper}>
+    <div className={styles.restaurantsWrapper} onClick={onClick}>
       <img src={image} alt="image" />
       <div className={styles.info}>
         <h4>{title}</h4>

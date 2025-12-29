@@ -3,6 +3,7 @@ import Logo from "../../../../components/Logo/Logo";
 import styles from "./ClientFavourites.module.scss";
 import bell from "../../../../assets/images/icons/bell-dark.svg";
 import Button from "../../../../components/Button/Button";
+import { useNavigateTo } from "../../../../hooks/useNavigateTo";
 
 interface Address {
   city: string;
@@ -26,6 +27,7 @@ interface Favourite {
 }
 
 function ClientFavourites() {
+  const { navigateTo } = useNavigateTo();
   const [favourites, setFavourites] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -93,7 +95,11 @@ function ClientFavourites() {
 
         <div className={styles.list}>
           {favourites.map((restaurant) => (
-            <div key={restaurant.id} className={styles.card}>
+            <div
+              key={restaurant.id}
+              className={styles.card}
+              onClick={navigateTo(`/food/establishments/${restaurant.id}`)}
+            >
               <img
                 src={restaurant.imageUrl}
                 alt={restaurant.title}

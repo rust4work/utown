@@ -38,6 +38,8 @@ import RecoverVerification from "../pages/LoginRegPage/LoginPage/RecoverPassword
 import NewPassword from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/NewPassword/NewPassword";
 import RestaurantDetails from "../pages/UTFood/FoodHome/Establishments/RestaurantsDetails/RestaurantsDetail";
 
+import Checkout from "../pages/UTFood/FoodHome/Establishments/RestaurantsDetails/CheckoutPage/Checkout";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -72,6 +74,7 @@ const router = createBrowserRouter(
           <Route index element={<FoodHome />} />
           <Route path="establishments" element={<Establishments />} />
           <Route path="establishments/:id" element={<RestaurantDetails />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
 
         {/* ADMIN */}

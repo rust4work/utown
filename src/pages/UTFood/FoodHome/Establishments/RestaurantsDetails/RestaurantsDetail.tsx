@@ -12,6 +12,7 @@ import { Spin } from "antd";
 import { CardSlider } from "../../../../../components/Slider/CardSlider";
 import { CategoriesCard } from "../../../../../components/Slider/Cards";
 import DishModal from "../../../../../components/DishModal/DishModal";
+import CartModal from "../../../../../components/CartModal/CartModal";
 
 interface Restaurant {
   id: number;
@@ -44,6 +45,12 @@ interface Dish {
   categoryName: string;
 }
 
+interface CartItem {
+  dish: Dish;
+  quantity: number;
+  selectedOption?: string;
+}
+
 function RestaurantDetail() {
   const { id } = useParams<{ id: string }>();
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
@@ -55,6 +62,10 @@ function RestaurantDetail() {
   const [selectedDish, setSelectedDish] = useState<Dish | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Cart state
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
   // FETCH RESTAURANT
   useEffect(() => {
@@ -121,38 +132,92 @@ function RestaurantDetail() {
 
     fetchDishes();
   }, [id]);
+
   const handleDishClick = (dish: Dish) => {
     setSelectedDish(dish);
     setIsModalOpen(true);
   };
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedDish(null);
   };
 
   const handleAddToOrder = (
-    dish: any,
+    dish: Dish,
     quantity: number,
     selectedOption: string
   ) => {
     console.log("Adding to order:", { dish, quantity, selectedOption });
-    //order logic
+
+    // Check if dish already exists in cart
+    const existingItemIndex = cart.findIndex(
+      (item) =>
+        item.dish.id === dish.id && item.selectedOption === selectedOption
+    );
+
+    if (existingItemIndex > -1) {
+      // Update quantity if item exists
+      const updatedCart = [...cart];
+      updatedCart[existingItemIndex].quantity += quantity;
+      setCart(updatedCart);
+    } else {
+      // Add new item to cart
+      setCart([...cart, { dish, quantity, selectedOption }]);
+    }
+
+    handleCloseModal();
+  };
+
+  const handleUpdateCartItem = (
+    dishId: number,
+    newQuantity: number,
+    selectedOption?: string
+  ) => {
+    if (newQuantity <= 0) {
+      // Remove item if quantity is 0
+      setCart(
+        cart.filter(
+          (item) =>
+            !(item.dish.id === dishId && item.selectedOption === selectedOption)
+        )
+      );
+    } else {
+      // Update quantity
+      setCart(
+        cart.map((item) =>
+          item.dish.id === dishId && item.selectedOption === selectedOption
+            ? { ...item, quantity: newQuantity }
+            : item
+        )
+      );
+    }
+  };
+
+  const getTotalItems = () => {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  const getTotalPrice = () => {
+    return cart.reduce(
+      (total, item) => total + item.dish.price * item.quantity,
+      0
+    );
   };
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
   const handleMenuAction = (action: string) => {
     console.log("Menu action:", action);
     setIsMenuOpen(false);
 
     switch (action) {
       case "call":
-        // Handle call action
-        window.location.href = "tel:+1234567890"; // Replace with actual phone
+        window.location.href = "tel:+1234567890";
         break;
       case "share":
-        // Handle share action
         if (navigator.share) {
           navigator.share({
             title: restaurant?.title,
@@ -161,7 +226,6 @@ function RestaurantDetail() {
         }
         break;
       case "report":
-        // Handle report action
         alert("Report functionality");
         break;
     }
@@ -355,6 +419,23 @@ function RestaurantDetail() {
           </div>
         )}
       </section>
+
+      {/* CART BUTTON - Fixed at bottom */}
+      {cart.length > 0 && (
+        <div className={styles.cartButtonContainer}>
+          <button
+            className={styles.cartButton}
+            onClick={() => setIsCartModalOpen(true)}
+          >
+            <span className={styles.cartBadge}>{getTotalItems()}</span>
+            <span className={styles.cartText}>View Order</span>
+            <span className={styles.cartTotal}>
+              {getTotalPrice().toLocaleString()} ₩
+            </span>
+          </button>
+        </div>
+      )}
+
       {selectedDish && (
         <DishModal
           dish={selectedDish}
@@ -363,6 +444,14 @@ function RestaurantDetail() {
           onAddToOrder={handleAddToOrder}
         />
       )}
+
+      <CartModal
+        isOpen={isCartModalOpen}
+        onClose={() => setIsCartModalOpen(false)}
+        cartItems={cart}
+        onUpdateQuantity={handleUpdateCartItem}
+        restaurant={restaurant}
+      />
     </div>
   );
 }
