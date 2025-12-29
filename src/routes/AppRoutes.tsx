@@ -10,13 +10,14 @@ import {
 import ProtectedRoute from "./ProtectedRoutes";
 import { UserProvider } from "../utils/UserContext";
 
-// Pages
+// Public
 import LoginRegPage from "../pages/LoginRegPage/LoginRegPage";
 import LoginPage from "../pages/LoginRegPage/LoginPage/LoginPage";
 import RegisterPage from "../pages/LoginRegPage/RegisterPage/RegisterPage";
 import RecoverPasswordPage from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/RecoverPasswordPage";
 import Verification from "../pages/LoginRegPage/RegisterPage/Verification/Verification";
 
+// Client
 import ClientDashboard from "../pages/Client/ClientDashboard";
 import ClientHome from "../pages/Client/ClientLayouts/ClientHome/ClientHome";
 import ClientFavourites from "../pages/Client/ClientLayouts/ClientFavourites/ClientFavourites";
@@ -26,13 +27,19 @@ import Information from "../pages/Client/ClientLayouts/ClientProfile/Information
 import Contact from "../pages/Client/ClientLayouts/ClientProfile/Contact/Contact";
 import EditInfo from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditInfo";
 import EditPassword from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditPassword";
-import UtFood from "../pages/UTFood/UtFood";
-import Establishments from "../pages/UTFood/FoodHome/Establishments/Establishments";
-import FoodHome from "../pages/UTFood/FoodHome/FoodHome";
 
+// UTFood
+import UtFood from "../pages/UTFood/UtFood";
+import FoodHome from "../pages/UTFood/FoodHome/FoodHome";
+import Establishments from "../pages/UTFood/FoodHome/Establishments/Establishments";
+
+// Admin
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import AdminLoginPage from "../pages/Admin/AdminLoginPage";
+import AdminAddClientPage from "../pages/Admin/AddClientPage/AdminAddClientPage";
+import AdminEditClientPage from "../pages/Admin/EditClientPage/AdminEditClientPage";
 
+// Restaurateur
 import ReastaraunterDashboard from "../pages/Restaurateur/RestaurateurDashboard";
 import RecoverVerification from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/RecoverVerification/RecoverVerification";
 import NewPassword from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/NewPassword/NewPassword";
@@ -69,8 +76,9 @@ const router = createBrowserRouter(
           <Route path="profile/information" element={<Information />} />
           <Route path="profile/contact" element={<Contact />} />
         </Route>
-        {/*---UTFOOD PAGE*/}
-        <Route path="food" element={<UtFood />}>
+
+        {/* UTFOOD */}
+        <Route path="/food" element={<UtFood />}>
           <Route index element={<FoodHome />} />
           <Route path="establishments" element={<Establishments />} />
           <Route path="establishments/:id" element={<RestaurantDetails />} />
@@ -79,6 +87,8 @@ const router = createBrowserRouter(
 
         {/* ADMIN */}
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/clients/add" element={<AdminAddClientPage />} />
+        <Route path="/admin/clients/:id/edit" element={<AdminEditClientPage />} />
 
         {/* RESTAURATEUR */}
         <Route path="/restaurateur" element={<ReastaraunterDashboard />} />
