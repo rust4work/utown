@@ -4,6 +4,7 @@ import styles from "./Checkout.module.scss";
 import { Spin } from "antd";
 import deliver from "../../../../../../assets/images/icons/delivery.svg";
 import map from "../../../../../../assets/images/icons/map.svg";
+import { Button } from "antd";
 
 interface CheckoutState {
   restaurantName: string;
@@ -49,6 +50,7 @@ function Checkout() {
   const [cardCVC, setCardCVC] = useState("");
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  // CLEAR CART
 
   // Fetch cart data
   useEffect(() => {
@@ -73,6 +75,38 @@ function Checkout() {
     fetchCartData();
   }, [navigate]);
 
+  const clearCart = async () => {
+    try {
+      const res = await fetch(
+        "https://utown-api.habsida.net/api/my-cart/clear",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Failed to clear cart");
+      }
+
+      setCartData({
+        id: cartData!.id,
+        deliveryPrice: 0,
+        sumOrder: 0,
+        totalDish: 0,
+        totalSum: 0,
+      });
+
+      alert("Cart cleared successfully");
+      navigate("/food/establishments");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to clear cart");
+    }
+  };
+
   const handlePayment = async () => {
     if (paymentMethod === "card") {
       if (!cardNumber || !cardExpiry || !cardCVC) {
@@ -90,6 +124,12 @@ function Checkout() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       alert("Order placed successfully!");
+      await fetch("https://utown-api.habsida.net/api/my-cart/clear", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
       navigate("/orders"); // Navigate to orders page
     } catch (error) {
       console.error("Payment failed:", error);
@@ -247,13 +287,23 @@ function Checkout() {
           </span>
         </div>
       </section>
+      <section className={styles.clearCartSection}>
+        <Button
+          danger
+          type="primary"
+          onClick={clearCart}
+          disabled={cartData.totalDish === 0}
+        >
+          Clear cart
+        </Button>
+      </section>
 
       {/* Payment Button */}
       <div className={styles.paymentButtonContainer}>
         <button
           className={styles.paymentButton}
           onClick={handlePayment}
-          //disabled={isProcessing || !deliveryAddress.street}
+          disabled={cartData.totalDish === 0}
         >
           {isProcessing
             ? "Processing..."

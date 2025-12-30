@@ -48,7 +48,14 @@ interface Dish {
 interface CartItem {
   dish: Dish;
   quantity: number;
-  selectedOption?: string;
+}
+
+interface CartSummary {
+  id: number;
+  deliveryPrice: number;
+  sumOrder: number;
+  totalDish: number;
+  totalSum: number;
 }
 
 function RestaurantDetail() {
@@ -65,7 +72,63 @@ function RestaurantDetail() {
 
   // Cart state
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [cartSummary, setCartSummary] = useState<CartSummary | null>(null);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+
+  // FETCH CART SUMMARY
+  const fetchCartSummary = async () => {
+    try {
+      const res = await fetch("https://utown-api.habsida.net/api/my-cart", {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
+      const data: CartSummary = await res.json();
+      setCartSummary(data);
+
+      // If there are items in cart (totalDish > 0), fetch the actual items
+      // You might need to use a different endpoint like /api/my-cart/items
+      if (data.totalDish > 0) {
+        // Try fetching cart items - adjust this endpoint based on your API
+        try {
+          const itemsRes = await fetch(
+            "https://utown-api.habsida.net/api/my-cart/items",
+            {
+              headers: {
+                Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+              },
+            }
+          );
+
+          if (itemsRes.ok) {
+            const itemsData = await itemsRes.json();
+            console.log("Cart items:", itemsData);
+
+            // Convert items to CartItem format
+            // Adjust this based on the actual response structure
+            if (Array.isArray(itemsData)) {
+              const convertedCart: CartItem[] = itemsData.map((item: any) => ({
+                dish: item.dish,
+                quantity: item.count || item.quantity,
+              }));
+              setCart(convertedCart);
+            }
+          }
+        } catch (error) {
+          console.error("Failed to fetch cart items:", error);
+        }
+      } else {
+        setCart([]);
+      }
+    } catch (error) {
+      console.error("Failed to fetch cart:", error);
+    }
+  };
+
+  // FETCH CART ON MOUNT
+  useEffect(() => {
+    fetchCartSummary();
+  }, []);
 
   // FETCH RESTAURANT
   useEffect(() => {
@@ -143,62 +206,100 @@ function RestaurantDetail() {
     setSelectedDish(null);
   };
 
-  const handleAddToOrder = (
-    dish: Dish,
-    quantity: number,
-    selectedOption: string
-  ) => {
-    console.log("Adding to order:", { dish, quantity, selectedOption });
+  const addItemToCartApi = async (dishId: number, count: number) => {
+    const res = await fetch("https://utown-api.habsida.net/api/my-cart/items", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        dishId,
+        count,
+      }),
+    });
 
-    // Check if dish already exists in cart
-    const existingItemIndex = cart.findIndex(
-      (item) =>
-        item.dish.id === dish.id && item.selectedOption === selectedOption
-    );
-
-    if (existingItemIndex > -1) {
-      // Update quantity if item exists
-      const updatedCart = [...cart];
-      updatedCart[existingItemIndex].quantity += quantity;
-      setCart(updatedCart);
-    } else {
-      // Add new item to cart
-      setCart([...cart, { dish, quantity, selectedOption }]);
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => null);
+      throw new Error(errorData?.message || "Failed to add item to cart");
     }
 
-    handleCloseModal();
+    return res.json();
   };
 
-  const handleUpdateCartItem = (
+  const handleAddToOrder = async (dish: Dish, quantity: number) => {
+    try {
+      await addItemToCartApi(dish.id, quantity);
+
+      // Option 1: Optimistically update local state (faster UI)
+      setCart((prev) => {
+        const existingItem = prev.find((item) => item.dish.id === dish.id);
+
+        if (existingItem) {
+          return prev.map((item) =>
+            item.dish.id === dish.id
+              ? { ...item, quantity: item.quantity + quantity }
+              : item
+          );
+        }
+
+        return [...prev, { dish, quantity }];
+      });
+
+      // Option 2: Fetch from server for accuracy (comment out Option 1 if using this)
+      // await fetchCartSummary();
+
+      handleCloseModal();
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message || "Could not add item to cart");
+    }
+  };
+
+  const handleUpdateCartItem = async (
     dishId: number,
     newQuantity: number,
     selectedOption?: string
   ) => {
-    if (newQuantity <= 0) {
-      // Remove item if quantity is 0
-      setCart(
-        cart.filter(
-          (item) =>
-            !(item.dish.id === dishId && item.selectedOption === selectedOption)
-        )
-      );
-    } else {
-      // Update quantity
-      setCart(
-        cart.map((item) =>
-          item.dish.id === dishId && item.selectedOption === selectedOption
-            ? { ...item, quantity: newQuantity }
-            : item
-        )
-      );
+    try {
+      if (newQuantity <= 0) {
+        // Remove item from local state
+        setCart(cart.filter((item) => item.dish.id !== dishId));
+
+        // TODO: Call API to remove item
+        // await deleteCartItemApi(dishId);
+      } else {
+        // Update local state
+        setCart(
+          cart.map((item) =>
+            item.dish.id === dishId ? { ...item, quantity: newQuantity } : item
+          )
+        );
+
+        // TODO: Call API to update quantity
+        // await updateCartItemApi(dishId, newQuantity);
+      }
+    } catch (error) {
+      console.error("Failed to update cart item:", error);
+      alert("Failed to update cart");
     }
   };
 
   const getTotalItems = () => {
+    // Use cartSummary if available (from backend)
+    if (cartSummary && cartSummary.totalDish > 0) {
+      return cartSummary.totalDish;
+    }
+    // Fallback to local cart calculation
     return cart.reduce((total, item) => total + item.quantity, 0);
   };
 
   const getTotalPrice = () => {
+    // Use cartSummary if available (from backend)
+    if (cartSummary && cartSummary.totalSum > 0) {
+      return cartSummary.totalSum;
+    }
+    // Fallback to local cart calculation
     return cart.reduce(
       (total, item) => total + item.dish.price * item.quantity,
       0
@@ -238,6 +339,8 @@ function RestaurantDetail() {
   if (!restaurant) {
     return <div className={styles.error}>Restaurant not found</div>;
   }
+
+  const hasItemsInCart = (cartSummary?.totalDish ?? 0) > 0 || cart.length > 0;
 
   return (
     <div className={styles.container}>
@@ -421,7 +524,7 @@ function RestaurantDetail() {
       </section>
 
       {/* CART BUTTON - Fixed at bottom */}
-      {cart.length > 0 && (
+      {hasItemsInCart && (
         <div className={styles.cartButtonContainer}>
           <button
             className={styles.cartButton}

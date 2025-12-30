@@ -1,6 +1,7 @@
 import { api } from "./axios/axios";
 
 export type LoginResponse = {
+  user: any;
   token: string;
   refreshToken: string;
 };

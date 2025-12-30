@@ -20,7 +20,7 @@ function Verification() {
   const [otp, setOtp] = React.useState("");
 
   const handleComplete = async () => {
-    if (otp !== "1234") {
+    if (otp !== "123456") {
       alert("Invalid verification code");
       return;
     }
@@ -68,7 +68,7 @@ function Verification() {
           <OtpInput
             value={otp}
             onChange={setOtp}
-            numInputs={4}
+            numInputs={6}
             renderInput={(props) => <input {...props} />}
             shouldAutoFocus={true}
             inputType="number"

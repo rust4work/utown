@@ -32,12 +32,6 @@ function NewPassword() {
 
   const onSubmit = async (data: NewPasswordFormData) => {
     try {
-      console.log({
-        username: state.username,
-        code: "123456",
-        newPassword: data.newPassword,
-      });
-
       await resetPassword({
         username: state.username,
         code: "123456",
