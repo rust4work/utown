@@ -25,6 +25,8 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
+    getValues,
+    trigger,
     formState: { errors },
   } = useForm<LoginFormData>({
     mode: "onBlur",
@@ -49,6 +51,21 @@ function LoginPage() {
       setError("Invalid phone number or password");
       setLoading(false);
     }
+  };
+
+  const handleRecoverClick = async () => {
+    const isValid = await trigger("phoneNumber"); // запускаем валидацию поля
+
+    if (!isValid) {
+      setError("Please enter your phone number to recover password");
+      return;
+    }
+
+    const phoneNumber = getValues("phoneNumber");
+
+    navigateTo("/recover-password", {
+      state: { phoneNumber },
+    })();
   };
 
   return (
@@ -114,10 +131,7 @@ function LoginPage() {
       <footer>
         <p>
           Forgot password?{" "}
-          <span
-            className={style.recover}
-            onClick={navigateTo("/recover-password")}
-          >
+          <span className={style.recover} onClick={handleRecoverClick}>
             Recover
           </span>
         </p>

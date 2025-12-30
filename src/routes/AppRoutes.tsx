@@ -34,6 +34,11 @@ import AdminDashboard from "../pages/Admin/AdminDashboard";
 import AdminLoginPage from "../pages/Admin/AdminLoginPage";
 
 import ReastaraunterDashboard from "../pages/Restaurateur/RestaurateurDashboard";
+import RecoverVerification from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/RecoverVerification/RecoverVerification";
+import NewPassword from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/NewPassword/NewPassword";
+import RestaurantDetails from "../pages/UTFood/FoodHome/Establishments/RestaurantsDetails/RestaurantsDetail";
+
+import Checkout from "../pages/UTFood/FoodHome/Establishments/RestaurantsDetails/CheckoutPage/Checkout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -44,6 +49,8 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/verification" element={<Verification />} />
       <Route path="/recover-password" element={<RecoverPasswordPage />} />
+      <Route path="/recover-verification" element={<RecoverVerification />} />
+      <Route path="/new-password" element={<NewPassword />} />
 
       {/* Admin login MUST be public */}
       <Route path="/admin/login" element={<AdminLoginPage />} />
@@ -66,6 +73,8 @@ const router = createBrowserRouter(
         <Route path="food" element={<UtFood />}>
           <Route index element={<FoodHome />} />
           <Route path="establishments" element={<Establishments />} />
+          <Route path="establishments/:id" element={<RestaurantDetails />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
 
         {/* ADMIN */}

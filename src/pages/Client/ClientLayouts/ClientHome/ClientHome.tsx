@@ -17,6 +17,7 @@ import ad1 from "../../../../assets/images/ads/Ad-1.svg";
 import ad2 from "../../../../assets/images/ads/Ad-2.svg";
 import { set } from "react-hook-form";
 import { Spin } from "antd";
+import ButtonMore from "../../../../components/ButtonMore/ButtonMore";
 
 function ClientHome() {
   const { navigateTo } = useNavigateTo();
@@ -70,7 +71,7 @@ function ClientHome() {
         <div className={styles.restaurants}>
           <div className={styles.restaurantsHeader}>
             <h3>Food Delivery</h3>
-            <button onClick={navigateTo("/food")}>More</button>
+            <ButtonMore path="/food" />
           </div>
           {loading && (
             <div className={styles.spinner}>
