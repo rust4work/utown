@@ -1,3 +1,5 @@
+/* Верхняя панель */
+
 .topBar {
     display: flex;
     justify-content: space-between;
@@ -37,6 +39,9 @@
 .breadcrumbActive {
     color: #111827;
 }
+
+
+/* Правый блок управления */
 
 .controlsBlock {
     display: flex;
@@ -417,11 +422,4 @@
     color: #fff;
     font-size: 14px;
     cursor: pointer;
-}
-
-.addressCell {
-    max-width: 260px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }

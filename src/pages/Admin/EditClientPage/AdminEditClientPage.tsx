@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AdminLayout from "../AdminLayout";
 import { getAdminClientById, updateAdminClient } from "../../../api/adminClients";
@@ -15,57 +15,66 @@ const AdminEditClientPage: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [avatarPreview, setAvatarPreview] = useState<string>("");
+  const [avatarUrl, setAvatarUrl] = useState<string>(""); // то, что отправляем на сервер
+  const [avatarPreview, setAvatarPreview] = useState<string>(""); // то, что показываем в UI
+
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState(""); 
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
 
   useEffect(() => {
-  if (!Number.isFinite(clientId)) {
-    setError("Invalid client id in URL");
-    setLoading(false);
-    return;
-  }
-
-  let cancelled = false;
-
-  (async () => {
-    try {
-      setLoading(true);
-      setError(null);
-
-      const c = await getAdminClientById(clientId);
-      if (cancelled) return;
-
-      setName(c.fullName || "");
-      setPhone(c.username || "");
-      setEmail(c.email || "");
-      setCity(c.city || "");
-      setAddress(c.address || "");
-      setAvatarPreview(c.avatarUrl || "");
-    } catch (e: any) {
-      if (!cancelled) setError(e?.message || "Failed to load client");
-    } finally {
-      if (!cancelled) setLoading(false);
+    if (!Number.isFinite(clientId)) {
+      setError("Invalid client id in URL");
+      setLoading(false);
+      return;
     }
-  })();
 
-  return () => {
-    cancelled = true;
-  };
-}, [clientId]);
+    let cancelled = false;
+
+    (async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const c = await getAdminClientById(clientId);
+        if (cancelled) return;
+
+        setName(c.fullName || "");
+        setPhone(c.username || "");
+        setEmail(c.email || "");
+        setCity(c.city || "");
+        setAddress(c.address || "");
+
+        setAvatarPreview(c.avatarUrl || "");
+        setAvatarUrl(c.avatarUrl || "");
+      } catch (e: any) {
+        if (!cancelled) setError(e?.message || "Failed to load client");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [clientId]);
 
   const onCancel = () => navigate("/admin");
-
   const onPickImage = () => fileRef.current?.click();
 
   const onFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const f = e.target.files?.[0];
     if (!f) return;
-    const url = URL.createObjectURL(f);
-    setAvatarPreview(url);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result || "");
+      setAvatarPreview(result);
+      setAvatarUrl(result);
+    };
+    reader.readAsDataURL(f);
   };
 
   const onSave: React.FormEventHandler = async (e) => {
@@ -81,6 +90,7 @@ const AdminEditClientPage: React.FC = () => {
         email,
         city,
         address,
+        avatarUrl,
       });
 
       navigate("/admin");
@@ -114,15 +124,27 @@ const AdminEditClientPage: React.FC = () => {
 
         <form className={styles.card} onSubmit={onSave}>
           <div className={styles.formBlock}>
-
             <div className={styles.cardTop}>
               <button type="button" className={styles.uploadBox} onClick={onPickImage}>
                 {avatarPreview ? (
                   <img src={avatarPreview} alt="avatar" className={styles.previewImg} />
                 ) : (
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 28V9" stroke="#101828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M7 18L16 9L25 18" stroke="#101828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M5 5H27" stroke="#101828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>)}
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 28V9" stroke="#101828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M7 18L16 9L25 18" stroke="#101828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M5 5H27" stroke="#101828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
               </button>
-              <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={onFileChange}/>
+
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={onFileChange}
+              />
+
               <div className={styles.previewBox} />
             </div>
 
@@ -155,6 +177,7 @@ const AdminEditClientPage: React.FC = () => {
 
             {error && <div style={{ color: "crimson", marginTop: 12 }}>{error}</div>}
           </div>
+
           <div className={styles.actions}>
             <button type="button" className={styles.cancel} onClick={onCancel}>
               Cancel

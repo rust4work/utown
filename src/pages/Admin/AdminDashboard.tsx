@@ -576,7 +576,8 @@ const AdminDashboard: React.FC = () => {
         client={selectedClient}
         onClose={closeClientCard}
         onEdit={handleEditClient}
-        onDelete={handleDeleteClient}/>
+        onDelete={handleDeleteClient}
+      />
     </AdminLayout>
   );
 };

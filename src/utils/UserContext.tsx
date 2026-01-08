@@ -3,7 +3,6 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 type User = {
   fullName?: string;
   phoneNumber?: string;
-  // добавь поля, которые приходят из API
 };
 
 type UserContextType = {

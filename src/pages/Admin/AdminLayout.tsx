@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/images/Logo-black.svg";
 import styles from "./AdminLayout.module.scss";
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -54,9 +55,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           </div>
 
           <nav className={styles.sidebarNav}>
-            <button type="button" className={`${styles.navItem} ${styles.navItemActive}`}>Clients</button>
+            <NavLink to="/admin" className={({ isActive }) => (isActive ? styles.navItemActive : styles.navItem)}>Clients</NavLink>
             <button type="button" className={styles.navItem}>Riders</button>
-            <button type="button" className={styles.navItem}>Establishments</button>
+            <NavLink to="/admin/establishments" className={({ isActive }) => (isActive ? styles.navItemActive : styles.navItem)}>Establishments</NavLink>
             <button type="button" className={styles.navItem}>Orders</button>
           </nav>
         </div>

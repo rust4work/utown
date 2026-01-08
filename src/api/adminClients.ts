@@ -14,15 +14,6 @@ export type AdminClient = {
   updatedAt: string;
 };
 
-export type UpdateAdminClientDto = {
-  fullName?: string;
-  username?: string;
-  email?: string;
-  city?: string;
-  address?: string;
-  avatarUrl?: string;
-};
-
 export type PageResponse<T> = {
   totalElements: number;
   totalPages: number;
@@ -41,7 +32,7 @@ export type CreateAdminClientPayload = {
   email: string;
   city?: string;
   address?: string;
-  avatarUrl?: string; 
+  avatarUrl?: string;
 };
 
 export type UpdateAdminClientPayload = Partial<CreateAdminClientPayload>;

@@ -38,6 +38,7 @@ import AdminDashboard from "../pages/Admin/AdminDashboard";
 import AdminLoginPage from "../pages/Admin/AdminLoginPage";
 import AdminAddClientPage from "../pages/Admin/AddClientPage/AdminAddClientPage";
 import AdminEditClientPage from "../pages/Admin/EditClientPage/AdminEditClientPage";
+import AdminEstablishmentsPage from "../pages/Admin/EstablishmentsPage/AdminEstablishmentsPage";
 
 // Restaurateur
 import ReastaraunterDashboard from "../pages/Restaurateur/RestaurateurDashboard";
@@ -89,6 +90,7 @@ const router = createBrowserRouter(
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/clients/add" element={<AdminAddClientPage />} />
         <Route path="/admin/clients/:id/edit" element={<AdminEditClientPage />} />
+        <Route path="/admin/establishments" element={<AdminEstablishmentsPage />} />
 
         {/* RESTAURATEUR */}
         <Route path="/restaurateur" element={<ReastaraunterDashboard />} />

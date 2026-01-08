@@ -1,16 +1,16 @@
 import { api } from "./axios/axios";
 
-export type LoginResponse = {
-  user: any;
-  token: string;
-  refreshToken: string;
+export type LoginRequest = {
+  username: string;
+  password: string;
 };
 
-export async function login(username: string, password: string) {
-  const { data } = await api.post<LoginResponse>("/auth/login", {
-    username,
-    password,
-  });
+export type LoginResponse = {
+  accessToken?: string;
+  refreshToken?: string;
+  token?: string;
+};
 
-  return data;
+export function login(payload: LoginRequest) {
+  return api.post<LoginResponse>("/auth/login", payload);
 }
