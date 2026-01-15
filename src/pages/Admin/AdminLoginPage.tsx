@@ -3,10 +3,12 @@ import Logo from "../../components/Logo/Logo";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 import { login } from "../../api/login";
 import { fetchUserProfile } from "../../api/auth";
-import { useNavigateTo } from "../../hooks/useNavigateTo";
-import { useUser } from "../../utils/UserContext";
+import { useUser } from "../../utils/UserContext"; 
+
 import styles from "./AdminLoginPage.module.scss";
 
 type AdminLoginFormData = {
@@ -15,7 +17,7 @@ type AdminLoginFormData = {
 };
 
 const AdminLoginPage: React.FC = () => {
-  const { navigateTo } = useNavigateTo();
+  const navigate = useNavigate();
   const { setUser } = useUser();
 
   const [loading, setLoading] = useState(false);
@@ -32,30 +34,29 @@ const AdminLoginPage: React.FC = () => {
       setLoading(true);
       setError(null);
 
-      const res = await login({ username: form.username, password: form.password });
+      const data = await login({
+        username: form.username,
+        password: form.password,
+      });
 
-      const accessToken = res.data?.accessToken ?? res.data?.token;
-      const refreshToken = res.data?.refreshToken;
-
+      const accessToken = data?.accessToken || data?.token;
       if (!accessToken) {
-        setError("Не пришёл accessToken от сервера");
+        setError("Сервер не вернул accessToken");
         return;
       }
 
       localStorage.setItem("token", accessToken);
       sessionStorage.setItem("token", accessToken);
-      localStorage.setItem("accessToken", accessToken);
-      sessionStorage.setItem("accessToken", accessToken);
 
-      if (refreshToken) {
-        localStorage.setItem("refreshToken", refreshToken);
-        sessionStorage.setItem("refreshToken", refreshToken);
+      if (data?.refreshToken) {
+        localStorage.setItem("refreshToken", data.refreshToken);
+        sessionStorage.setItem("refreshToken", data.refreshToken);
       }
 
       const profile = await fetchUserProfile();
       setUser(profile);
 
-      navigateTo("/admin");
+      navigate("/admin");
     } catch (err: any) {
       setError(err?.response?.data?.message || err?.message || "Login failed");
     } finally {
@@ -77,7 +78,10 @@ const AdminLoginPage: React.FC = () => {
 
           <div className={styles.field}>
             <label className={styles.label}>Username</label>
-            <Input placeholder="admin" {...register("username", { required: "Username обязателен" })} />
+            <Input
+              placeholder="admin"
+              {...register("username", { required: "Username обязателен" })}
+            />
             {errors.username && <p className={styles.error}>{errors.username.message}</p>}
           </div>
 
@@ -94,7 +98,12 @@ const AdminLoginPage: React.FC = () => {
 
           {error && <p className={styles.globalError}>{error}</p>}
 
-          <Button type="submit" typeOfButton="primary" className={styles.submitButton} disabled={loading}>
+          <Button
+            type="submit"
+            typeOfButton="primary"
+            className={styles.submitButton}
+            disabled={loading}
+          >
             {loading ? "Logging in..." : "Login as admin"}
           </Button>
         </form>

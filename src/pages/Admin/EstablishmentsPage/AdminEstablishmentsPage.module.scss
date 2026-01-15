@@ -1,6 +1,4 @@
-/* Верхняя панель */
-
-.topBar {
+.head {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -10,58 +8,74 @@
     padding: 0 24px;
 }
 
-.titleBlock {
-    min-width: 240px;
-}
-
-.pageTitle {
-    font-size: 24px;
-    font-weight: 700;
-    color: #000;
+.title {
     margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #101828;
 }
 
 .breadcrumbs {
-    margin-top: 22px;
+    margin-top: 8px;
     font-size: 12px;
+    line-height: 1.4;
     color: #667085;
 }
 
 .breadcrumbLink {
-    color: #7749f8;
+    color: #7a5af8;
+    text-decoration: none;
     cursor: pointer;
 }
 
-.breadcrumbs span:last-child {
+.active {
     color: #68717a;
 }
 
-.breadcrumbActive {
-    color: #111827;
-}
-
-
-/* Правый блок управления */
-
-.controlsBlock {
+.controls {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
 }
 
-.searchInput {
+.headBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.searchInputWrap {
+    position: relative;
+    width: 100%;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+}
+
+.search {
     width: 488px;
     padding: 8px 12px;
     border-radius: 8px;
     border: 1px solid #d3d7e3;
     font-size: 12px;
     background: #fff;
+    color: #68717a;
 }
 
-.actionsRow {
+.search::placeholder {
+    color: #68717a;
+}
+
+.filterRow {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     align-items: center;
 }
 
@@ -75,18 +89,39 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: #68717a;
 }
 
-.selectText {
+
+/* Choose action (dropdown) */
+
+.actionDropdownWrap {
+    position: relative;
+    flex: 1;
+}
+
+.chooseActionBtn {
+    min-width: 240px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #d3d7e3;
+    background: #fff;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chooseActionText {
     font-size: 14px;
-    color: #667085;
+    color: #101828;
 }
 
-.selectIcon {
-    display: inline-flex;
+.chooseActionChevron {
+    opacity: 0.7;
 }
 
-.applyButton {
+.applyBtn {
     padding: 10px 19px;
     border-radius: 4px;
     border: none;
@@ -96,330 +131,295 @@
     cursor: pointer;
 }
 
-.applyButton:hover {
+.applyBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.applyBtn:hover {
     background: #6b7280;
     transition: .4s ease all;
 }
 
-.tableWrapper {
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 260px);
-    min-height: 520px;
-}
-
-.tableContainer {
-    flex: 1;
-    width: 100%;
-    overflow: auto;
-}
-
-.tableWrapper .table {
-    width: 100% !important;
-    min-width: 100% !important;
-    margin: 0 !important;
-    display: table !important;
-    border-collapse: collapse;
-    table-layout: fixed;
-    font-size: 12px;
-}
-
-
-/* Шапка */
-
-.table thead tr {
-    background: #f3f3f3;
-}
-
-.table thead th {
-    background: #f3f3f3;
-    font-weight: 600;
-    color: #111827;
-}
-
-.table th,
-.table td {
-    padding: 10px 14px;
-    border-bottom: 1px solid #f1f2f6;
-    text-align: left;
-    vertical-align: middle;
-}
-
-
-/* Колонки */
-
-.checkboxCol {
-    width: 44px;
-}
-
-.eyeCol {
-    width: 56px;
-    text-align: center;
-}
-
-.thWithSort {
-    display: inline-flex;
-    gap: 6px;
-    align-items: center;
-}
-
-.sortIcon {
-    font-size: 10px;
-    color: #a7a9b7;
-    transform: translateY(-1px);
-}
-
-
-/* View */
-
-.viewLink {
-    border: none;
-    background: none;
-    padding: 0;
-    color: #101828;
-    cursor: pointer;
-    font-size: 12px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.viewArrow {
-    font-size: 14px;
-    line-height: 1;
-    color: #98a2b3;
-}
-
-
-/* Глаз */
-
-.eyeButton {
-    width: 28px;
-    height: 28px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-/* hover row */
-
-.clickableRow {
-    cursor: pointer;
-}
-
-.clickableRow:hover {
-    background: #fafafa;
-}
-
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 0 16px;
-}
-
-.paginationButton {
-    min-width: 40px;
-    height: 30px;
-    padding: 0 12px;
-    border: 1px solid #d9dce7;
-    background: #fff;
-    color: #191d31;
-    font-size: 11px;
-    cursor: pointer;
-    border-radius: 0;
-    margin-left: -1px;
-}
-
-.paginationButton:first-child {
-    margin-left: 0;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-}
-
-.paginationButton:last-child {
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-}
-
-.pageActive {
-    background: #2b2b2b;
-    color: #fff;
-    border-color: #2b2b2b;
-}
-
-.paginationButton:disabled {
-    opacity: 0.4;
-    cursor: default;
-}
-
-// filter // 
-.filterWrap {
-    position: relative;
-}
-
-.filterDropdown {
-    position: absolute;
-    top: 38px;
-    left: 0;
-    width: 360px;
-    background: #fff;
-    border: 1px solid #d3d7e3;
-    border-radius: 8px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
-    z-index: 50;
-    overflow: hidden;
-}
-
-.filterHead {
-    padding: 10px 12px;
-    font-size: 12px;
-    font-weight: 600;
-    border-bottom: 1px solid #e6e8f0;
-    color: #111827;
-}
-
-.filterSectionTitle {
-    padding: 10px 12px 6px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #111827;
-}
-
-.filterList {
-    padding: 0 12px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.filterItem {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    font-size: 13px;
-    color: #111827;
-    input {
-        width: 16px;
-        height: 16px;
-    }
-}
-
-.filterEmpty {
-    font-size: 12px;
-    color: #667085;
-}
-
-.filterActions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    padding: 10px 12px;
-    border-top: 1px solid #e6e8f0;
-    background: #fff;
-}
-
-.filterCancel {
-    height: 32px;
-    padding: 0 14px;
-    border-radius: 6px;
-    border: 1px solid #d0d5dd;
-    background: #fff;
-    cursor: pointer;
-}
-
-.filterApply {
-    height: 32px;
-    padding: 0 14px;
-    border-radius: 6px;
-    border: none;
-    background: #0b57d0;
-    color: #fff;
-    cursor: pointer;
-}
-
-.filterClear {
-    width: 100%;
-    border: none;
-    background: #f7f7fb;
-    color: #111827;
-    padding: 10px 12px;
-    cursor: pointer;
-    border-top: 1px solid #e6e8f0;
-}
-
-// action 
-.actionWrap {
-    position: relative;
-}
-
-.actionDropdown {
+.actionPopup {
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    width: 360px;
-    background: #fff;
+    width: 320px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 16px 32px rgba(16, 24, 40, 0.16);
     border: 1px solid #eaecf0;
-    border-radius: 10px;
-    box-shadow: 0 12px 24px rgba(16, 24, 40, 0.18);
-    overflow: hidden;
+    padding: 16px;
     z-index: 50;
 }
 
-.actionHead {
-    padding: 16px 18px;
+.actionTitle {
     font-size: 16px;
-    font-weight: 600;
-    border-bottom: 1px solid #eaecf0;
+    font-weight: 700;
+    color: #101828;
+    margin-bottom: 12px;
 }
 
 .actionItem {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 16px 18px;
-    border-bottom: 1px solid #f2f4f7;
-    font-size: 16px;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 14px;
     color: #101828;
-    input {
-        width: 18px;
-        height: 18px;
-    }
 }
 
-.actionDelete {
-    color: #b42318;
+.checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid #d0d5dd;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.actionActions {
+.checkboxLine {
+    height: 1px;
+    background: #eaecf0;
+    margin: 6px 0;
+}
+
+.deleteAction {
+    color: #d92d20;
+    font-weight: 600;
+}
+
+.actionButtons {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
-    padding: 14px 18px;
+    margin-top: 14px;
+}
+
+.cancelBtn {
+    height: 36px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 0 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.actionButtons .applyBtn {
+    background: #2e90fa;
+}
+
+
+/* Table */
+
+.tableWrap {
+    margin-top: 12px;
+    background: #ffffff;
+    overflow: hidden;
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background: #f3f3f3;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid #eaecf0;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f1f2f6;
+    font-size: 14px;
+    color: #101828;
+    vertical-align: middle;
+}
+
+.row {
+    cursor: pointer;
+}
+
+.row:hover {
+    background: #f9fafb;
+}
+
+.checkboxCell {
+    width: 42px;
+}
+
+.viewCell {
+    width: 54px;
+    text-align: center;
+}
+
+.eyeIcon {
+    opacity: 0.85;
+}
+
+.eyeIcon:hover {
+    opacity: 1;
+}
+
+.empty {
+    padding: 22px 14px;
+    color: #667085;
+    font-size: 14px;
+}
+
+
+/* Confirm delete modal */
+
+.confirmOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(16, 24, 40, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 80;
+}
+
+.confirmModal {
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(16, 24, 40, 0.22);
+}
+
+.confirmTitle {
+    margin: 0 0 14px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #101828;
+}
+
+.confirmDelete {
+    width: 100%;
+    height: 44px;
+    border: none;
+    border-radius: 10px;
+    background: #f2f4f7;
+    color: #d92d20;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.error {
+    color: crimson;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+
+/* Choose action */
+
+.chooseActionWrap {
+    position: relative;
+}
+
+.caret {
+    font-size: 11px;
+    color: #667085;
+}
+
+.actionPopover {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 340px;
+    background: #fff;
+    border: 1px solid #eaecf0;
+    border-radius: 10px;
+    box-shadow: 0 14px 40px rgba(16, 24, 40, 0.18);
+    padding: 14px;
+    z-index: 50;
+}
+
+.deleteItem {
+    color: #d92d20;
+}
+
+.actionFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
 }
 
 .actionCancel {
     height: 34px;
-    min-width: 80px;
-    border-radius: 6px;
+    padding: 0 14px;
+    border-radius: 8px;
     border: 1px solid #d0d5dd;
     background: #fff;
-    font-size: 14px;
     cursor: pointer;
 }
 
 .actionApply {
     height: 34px;
-    min-width: 80px;
-    border-radius: 6px;
-    border: 1px solid #175cd3;
-    background: #175cd3;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 0;
+    background: #1976d2;
     color: #fff;
-    font-size: 14px;
+    cursor: pointer;
+}
+
+.hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #667085;
+}
+
+
+/* table small helpers */
+
+.viewCell {
+    color: #344054;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.chev {
+    margin-left: 6px;
+    color: #667085;
+}
+
+.eyeCell {
+    width: 44px;
+    text-align: right;
+}
+
+.eyeBtn {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+/* Confirm delete modal */
+
+.confirmCancel {
+    width: 100%;
+    height: 42px;
+    border-radius: 8px;
+    border: 0;
+    background: #101828;
+    color: #fff;
+    font-weight: 700;
     cursor: pointer;
 }

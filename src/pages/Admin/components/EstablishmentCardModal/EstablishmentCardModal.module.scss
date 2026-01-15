@@ -1,0 +1,113 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(16, 24, 40, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal {
+    position: relative;
+    width: 760px;
+    max-width: calc(100vw - 48px);
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid #1976d2;
+    padding: 18px 18px 22px;
+}
+
+.close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: 0;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.top {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.imageWrap {
+    width: 220px;
+    height: 140px;
+    background: #f2f4f7;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background: #e5e7eb;
+}
+
+.rightTop {
+    display: grid;
+    gap: 10px;
+    justify-items: end;
+}
+
+.actionBtn {
+    width: 220px;
+    height: 36px;
+    border: 0;
+    border-radius: 6px;
+    background: #f2f4f7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    cursor: pointer;
+}
+
+.arrow {
+    font-weight: 700;
+}
+
+.content {
+    margin-top: 14px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+}
+
+.col {
+    display: grid;
+    gap: 14px;
+}
+
+.blockTitle {
+    font-size: 12px;
+    font-weight: 700;
+    color: #475467;
+    margin-bottom: 4px;
+}
+
+.blockText {
+    font-size: 13px;
+    color: #101828;
+    line-height: 1.35;
+}

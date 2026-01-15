@@ -11,6 +11,7 @@ export type LoginResponse = {
   token?: string;
 };
 
-export function login(payload: LoginRequest) {
-  return api.post<LoginResponse>("/auth/login", payload);
+export async function login(payload: LoginRequest): Promise<LoginResponse> {
+  const { data } = await api.post<LoginResponse>("/auth/login", payload);
+  return data;
 }

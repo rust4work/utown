@@ -39,6 +39,7 @@ import AdminLoginPage from "../pages/Admin/AdminLoginPage";
 import AdminAddClientPage from "../pages/Admin/AddClientPage/AdminAddClientPage";
 import AdminEditClientPage from "../pages/Admin/EditClientPage/AdminEditClientPage";
 import AdminEstablishmentsPage from "../pages/Admin/EstablishmentsPage/AdminEstablishmentsPage";
+import AdminProtectedRoute from "../api/AdminProtectedRoute";
 
 // Restaurateur
 import ReastaraunterDashboard from "../pages/Restaurateur/RestaurateurDashboard";
@@ -87,10 +88,12 @@ const router = createBrowserRouter(
         </Route>
 
         {/* ADMIN */}
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/clients/add" element={<AdminAddClientPage />} />
-        <Route path="/admin/clients/:id/edit" element={<AdminEditClientPage />} />
-        <Route path="/admin/establishments" element={<AdminEstablishmentsPage />} />
+        <Route element={<AdminProtectedRoute />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/clients/add" element={<AdminAddClientPage />} />
+          <Route path="/admin/clients/:id/edit" element={<AdminEditClientPage />} />
+          <Route path="/admin/establishments" element={<AdminEstablishmentsPage />} />
+        </Route>
 
         {/* RESTAURATEUR */}
         <Route path="/restaurateur" element={<ReastaraunterDashboard />} />

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import AdminLayout from "../AdminLayout";
 import { getAdminClientById, updateAdminClient } from "../../../api/adminClients";
 import styles from "./AdminEditClientPage.module.scss";
+import { validateAdminClientForm } from "../../../utils/validateAdminClient";
 
 const AdminEditClientPage: React.FC = () => {
   const { id } = useParams();
@@ -15,8 +16,8 @@ const AdminEditClientPage: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [avatarUrl, setAvatarUrl] = useState<string>(""); // то, что отправляем на сервер
-  const [avatarPreview, setAvatarPreview] = useState<string>(""); // то, что показываем в UI
+  const [avatarUrl, setAvatarUrl] = useState<string>(""); 
+  const [avatarPreview, setAvatarPreview] = useState<string>("");
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -79,18 +80,32 @@ const AdminEditClientPage: React.FC = () => {
 
   const onSave: React.FormEventHandler = async (e) => {
     e.preventDefault();
+    setError(null);
+
+    const errors = validateAdminClientForm({
+      fullName: name,
+      username: phone,
+      email,
+      city,
+      address,
+    });
+
+    const firstError = Object.values(errors)[0];
+    if (firstError) {
+      setError(firstError);
+      return;
+    }
 
     try {
       setSaving(true);
-      setError(null);
 
       await updateAdminClient(clientId, {
-        fullName: name,
-        username: phone,
-        email,
-        city,
-        address,
-        avatarUrl,
+        fullName: name.trim(),
+        username: phone.trim(),
+        email: email.trim(),
+        city: city.trim() || undefined,
+        address: address.trim() || undefined,
+        avatarUrl: avatarUrl || undefined,
       });
 
       navigate("/admin");
@@ -117,8 +132,10 @@ const AdminEditClientPage: React.FC = () => {
           <div className={styles.breadcrumbs}>
             <span className={styles.breadcrumbLink}>Home</span> /{" "}
             <span className={styles.breadcrumbLink}>Users</span> /{" "}
-            <a href="/admin" className={styles.breadcrumbLink}>Clients</a> /{" "}
-            <span className={styles.active}>Edit</span>
+            <a href="/admin" className={styles.breadcrumbLink}>
+              Clients
+            </a>{" "}
+            / <span className={styles.active}>Edit</span>
           </div>
         </div>
 
@@ -129,10 +146,34 @@ const AdminEditClientPage: React.FC = () => {
                 {avatarPreview ? (
                   <img src={avatarPreview} alt="avatar" className={styles.previewImg} />
                 ) : (
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M16 28V9" stroke="#101828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M7 18L16 9L25 18" stroke="#101828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M5 5H27" stroke="#101828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16 28V9"
+                      stroke="#101828"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M7 18L16 9L25 18"
+                      stroke="#101828"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M5 5H27"
+                      stroke="#101828"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 )}
               </button>

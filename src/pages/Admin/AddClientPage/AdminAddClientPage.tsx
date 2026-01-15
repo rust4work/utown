@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AdminLayout from "../AdminLayout";
 import styles from "./AdminAddClientPage.module.scss";
 import { createAdminClient } from "../../../api/adminClients";
+import { validateAdminClientForm } from "../../../utils/validateAdminClient";
 
 const fileToBase64 = (file: File) =>
   new Promise<string>((resolve, reject) => {
@@ -49,8 +50,17 @@ const AdminAddClientPage: React.FC = () => {
     e.preventDefault();
     setError(null);
 
-    if (!fullName.trim() || !phone.trim() || !email.trim()) {
-      setError("Please fill Name, Phone number and Email");
+    const errors = validateAdminClientForm({
+      fullName,
+      username: phone,
+      email,
+      city,
+      address,
+    });
+
+    const firstError = Object.values(errors)[0];
+    if (firstError) {
+      setError(firstError);
       return;
     }
 
@@ -92,18 +102,57 @@ const AdminAddClientPage: React.FC = () => {
         <form className={styles.card} onSubmit={onSubmit}>
           <div className={styles.formBlock}>
             <div className={styles.cardTop}>
-              <button  type="button"  className={styles.uploadBox}  onClick={pickFile}  aria-label="Upload avatar">
+              <button
+                type="button"
+                className={styles.uploadBox}
+                onClick={pickFile}
+                aria-label="Upload avatar"
+              >
                 {avatarUrl ? (
                   <img src={avatarUrl} alt="preview" className={styles.uploadPreview} />
                 ) : (
-                  <svg  width="32"  height="32"  viewBox="0 0 32 32"  fill="none"  xmlns="http://www.w3.org/2000/svg"><path  d="M16 28V9"  stroke="#101828"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round"/><path  d="M7 18L16 9L25 18"  stroke="#101828"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round"/><path  d="M5 5H27"  stroke="#101828"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round"/></svg>
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16 28V9"
+                      stroke="#101828"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M7 18L16 9L25 18"
+                      stroke="#101828"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M5 5H27"
+                      stroke="#101828"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 )}
               </button>
 
               <div className={styles.previewBox} />
             </div>
 
-            <input  ref={fileRef}  type="file"  accept="image/*"  onChange={onFileChange}  style={{ display: "none" }}/>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/*"
+              onChange={onFileChange}
+              style={{ display: "none" }}
+            />
 
             <div className={styles.fields}>
               <label className={styles.field}>
@@ -157,7 +206,9 @@ const AdminAddClientPage: React.FC = () => {
               </label>
 
               {error && (
-                <div style={{ color: "crimson", fontWeight: 700, marginTop: 10 }}>{error}</div>
+                <div style={{ color: "crimson", fontWeight: 700, marginTop: 10 }}>
+                  {error}
+                </div>
               )}
             </div>
           </div>
