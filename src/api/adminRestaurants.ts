@@ -1,8 +1,8 @@
 import { api } from "./axios/axios";
 
-export type RestaurantAddress = {
-  id: number;
-  area?: string;
+export type AdminRestaurantAddress = {
+  id?: number;
+  area?: string; // delivery areas
   city?: string;
   details?: string;
   fullAddress?: string;
@@ -22,21 +22,17 @@ export type AdminRestaurant = {
   category?: string;
   deliveryTime?: string;
   facilities?: string;
-
   isRecommended?: boolean;
   minOrderAmount?: number;
   phone?: string;
-
   ratings?: number;
-  totalRatings?: number;
-
   status?: number;
   statusDisplay?: string;
-
+  totalRatings?: number;
   isActive?: boolean;
   imageUrl?: string;
 
-  address?: RestaurantAddress;
+  address?: AdminRestaurantAddress;
 
   createdAt?: string;
   updatedAt?: string;
@@ -51,35 +47,42 @@ export type AdminRestaurant = {
   ownerId?: number;
 };
 
-export type PageResponse<T> = {
-  totalElements: number;
-  totalPages: number;
-  first: boolean;
-  last: boolean;
-  size: number;
-  number: number;
-  numberOfElements: number;
-  empty: boolean;
-  content: T[];
+export type AdminRestaurantCreatePayload = {
+  title: string;
+  description?: string;
+  category?: string;
+  deliveryTime?: string;
+  facilities?: string;
+  isRecommended?: boolean;
+  minOrderAmount?: number;
+  phone?: string;
+  imageUrl?: string;
+  address?: AdminRestaurantAddress;
+  ownerId: number;
 };
 
-export async function getAdminRestaurants(page: number, size: number) {
-  const { data } = await api.get<PageResponse<AdminRestaurant>>("/admin/restaurants", {
-    params: { page, size },
-  });
-  return data;
-}
+export type AdminRestaurantUpdatePayload = Omit<AdminRestaurantCreatePayload, "ownerId">;
 
-export async function getAdminRestaurantById(id: number) {
-  const { data } = await api.get<AdminRestaurant>(`/admin/restaurants/${id}`);
+export const getAdminRestaurants = async (page = 0, size = 8) => {
+  const { data } = await api.get(`/admin/restaurants`, { params: { page, size } });
   return data;
-}
+};
 
-export async function updateAdminRestaurant(id: number, payload: Partial<AdminRestaurant>) {
-  const { data } = await api.put<AdminRestaurant>(`/admin/restaurants/${id}`, payload);
-  return data;
-}
+export const getAdminRestaurantById = async (id: number) => {
+  const { data } = await api.get(`/admin/restaurants/${id}`);
+  return data as AdminRestaurant;
+};
 
-export async function deleteAdminRestaurant(id: number) {
+export const createAdminRestaurant = async (payload: AdminRestaurantCreatePayload) => {
+  const { data } = await api.post(`/admin/restaurants`, payload);
+  return data as AdminRestaurant;
+};
+
+export const updateAdminRestaurant = async (id: number, payload: AdminRestaurantUpdatePayload) => {
+  const { data } = await api.put(`/admin/restaurants/${id}`, payload);
+  return data as AdminRestaurant;
+};
+
+export const deleteAdminRestaurant = async (id: number) => {
   await api.delete(`/admin/restaurants/${id}`);
-}
+};

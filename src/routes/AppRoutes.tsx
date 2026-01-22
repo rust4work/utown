@@ -39,6 +39,14 @@ import AdminLoginPage from "../pages/Admin/AdminLoginPage";
 import AdminAddClientPage from "../pages/Admin/AddClientPage/AdminAddClientPage";
 import AdminEditClientPage from "../pages/Admin/EditClientPage/AdminEditClientPage";
 import AdminEstablishmentsPage from "../pages/Admin/EstablishmentsPage/AdminEstablishmentsPage";
+import AdminAddEstablishmentPage from "../pages/Admin/Establishments/AdminAddEstablishmentPage";
+import AdminEditEstablishmentPage from "../pages/Admin/EditEstablishmentPage/AdminEditEstablishmentPage";
+import AdminPositionsPage from "../pages/Admin/EstablishmentsPage/AdminPositionsPage";
+import AdminCategoriesPage from "../pages/Admin/EstablishmentsPage/AdminCategoriesPage";
+import AdminEditPositionPage from "../pages/Admin/EditPositionPage/AdminEditPositionPage";
+import AdminAddPositionPage from "../pages/Admin/AddPositionPage/AdminAddPositionPage";
+import AdminAddCategoryPage from "../pages/Admin/AddCategoryPage/AdminAddCategoryPage";
+import AdminOrderHistoryPage from "../pages/Admin/OrdersPage/AdminOrderHistoryPage";
 import AdminProtectedRoute from "../api/AdminProtectedRoute";
 
 // Restaurateur
@@ -93,6 +101,14 @@ const router = createBrowserRouter(
           <Route path="/admin/clients/add" element={<AdminAddClientPage />} />
           <Route path="/admin/clients/:id/edit" element={<AdminEditClientPage />} />
           <Route path="/admin/establishments" element={<AdminEstablishmentsPage />} />
+          <Route path="/admin/establishments/add" element={<AdminAddEstablishmentPage />} />
+          <Route path="/admin/establishments/:id/edit" element={<AdminEditEstablishmentPage  />} />
+          <Route path="/admin/establishments/:id/positions" element={<AdminPositionsPage />} />
+          <Route path="/admin/establishments/:id/categories" element={<AdminCategoriesPage />} />
+          <Route path="/admin/establishments/:id/categories/add" element={<AdminAddCategoryPage />} />
+          <Route path="/admin/establishments/:id/positions/add" element={<AdminAddPositionPage />} />
+          <Route path="/admin/establishments/:id/orders" element={<AdminOrderHistoryPage />} />
+          <Route path="/admin/establishments/:id/positions/:positionId/edit" element={<AdminEditPositionPage />}/>
         </Route>
 
         {/* RESTAURATEUR */}

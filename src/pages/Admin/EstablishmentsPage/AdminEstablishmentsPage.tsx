@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import AdminLayout from "../AdminLayout";
 import styles from "./AdminEstablishmentsPage.module.scss";
 import {
@@ -12,6 +13,8 @@ import EstablishmentCardModal from "../../Admin/components/EstablishmentCardModa
 type ActionType = "ACTIVE" | "INACTIVE" | "DELETE" | null;
 
 const AdminEstablishmentsPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [rows, setRows] = useState<AdminRestaurant[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,14 +24,11 @@ const AdminEstablishmentsPage: React.FC = () => {
 
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
-  // Choose action
   const [actionOpen, setActionOpen] = useState(false);
   const [chosenAction, setChosenAction] = useState<ActionType>(null);
 
-  // Delete confirm
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  // Details modal
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [activeRestaurant, setActiveRestaurant] = useState<AdminRestaurant | null>(null);
 
@@ -78,11 +78,8 @@ const AdminEstablishmentsPage: React.FC = () => {
   }, [actionOpen]);
 
   const toggleAll = () => {
-    if (allChecked) {
-      setSelectedIds([]);
-    } else {
-      setSelectedIds(rows.map((r) => r.id));
-    }
+    if (allChecked) setSelectedIds([]);
+    else setSelectedIds(rows.map((r) => r.id));
   };
 
   const toggleOne = (id: number) => {
@@ -92,6 +89,18 @@ const AdminEstablishmentsPage: React.FC = () => {
   const openDetails = (r: AdminRestaurant) => {
     setActiveRestaurant(r);
     setDetailsOpen(true);
+  };
+
+  const goToPositions = (restaurantId: number) => {
+    navigate(`/admin/establishments/${restaurantId}/positions`);
+  };
+
+  const goToCategories = (restaurantId: number) => {
+    navigate(`/admin/establishments/${restaurantId}/categories`);
+  };
+
+  const goToOrders = (restaurantId: number) => {
+    navigate(`/admin/establishments/${restaurantId}/orders`);
   };
 
   const applyAction = async () => {
@@ -158,6 +167,7 @@ const AdminEstablishmentsPage: React.FC = () => {
               <span className={styles.active}>Establishments</span>
             </div>
           </div>
+
           <div className={styles.controls}>
             <div className={styles.searchWrap}>
               <input className={styles.search} placeholder="Search" />
@@ -165,17 +175,21 @@ const AdminEstablishmentsPage: React.FC = () => {
 
             <div className={styles.filterRow}>
               <select className={styles.select}>
-                <option>Filter <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 5H3L8 10L13 5Z" fill="#495057" /></svg></option>
+                <option>Filter</option>
               </select>
 
-              {/* Choose action */}
               <div className={styles.chooseActionWrap} ref={actionRef}>
                 <button
                   type="button"
                   className={styles.chooseActionBtn}
                   onClick={() => setActionOpen((v) => !v)}
                 >
-                  Choose action <span className={styles.caret}><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 5H3L8 10L13 5Z" fill="#495057" /></svg></span>
+                  Choose action{" "}
+                  <span className={styles.caret}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M13 5H3L8 10L13 5Z" fill="#495057" />
+                    </svg>
+                  </span>
                 </button>
 
                 {actionOpen && (
@@ -195,9 +209,7 @@ const AdminEstablishmentsPage: React.FC = () => {
                       <input
                         type="checkbox"
                         checked={chosenAction === "INACTIVE"}
-                        onChange={() =>
-                          setChosenAction((prev) => (prev === "INACTIVE" ? null : "INACTIVE"))
-                        }
+                        onChange={() => setChosenAction((prev) => (prev === "INACTIVE" ? null : "INACTIVE"))}
                       />
                       <span>Inactive</span>
                     </label>
@@ -206,9 +218,7 @@ const AdminEstablishmentsPage: React.FC = () => {
                       <input
                         type="checkbox"
                         checked={chosenAction === "DELETE"}
-                        onChange={() =>
-                          setChosenAction((prev) => (prev === "DELETE" ? null : "DELETE"))
-                        }
+                        onChange={() => setChosenAction((prev) => (prev === "DELETE" ? null : "DELETE"))}
                       />
                       <span>Delete</span>
                     </label>
@@ -258,6 +268,7 @@ const AdminEstablishmentsPage: React.FC = () => {
                 <th>Positions</th>
                 <th>Order history</th>
                 <th />
+                <th />
               </tr>
             </thead>
 
@@ -272,19 +283,25 @@ const AdminEstablishmentsPage: React.FC = () => {
                 rows.map((r) => (
                   <tr key={r.id}>
                     <td className={styles.checkboxCell}>
-                      <input
-                        type="checkbox"
-                        checked={selectedIds.includes(r.id)}
-                        onChange={() => toggleOne(r.id)}
-                      />
+                      <input type="checkbox" checked={selectedIds.includes(r.id)} onChange={() => toggleOne(r.id)} />
                     </td>
                     <td>{r.title}</td>
                     <td>{r.phone || "—"}</td>
                     <td>{r.city || r.address?.city || "—"}</td>
                     <td>{typeof r.ordersCount === "number" ? r.ordersCount : "—"}</td>
-                    <td className={styles.viewCell}>View <span className={styles.chev}>›</span></td>
-                    <td className={styles.viewCell}>View <span className={styles.chev}>›</span></td>
-                    <td className={styles.viewCell}>View <span className={styles.chev}>›</span></td>
+
+                    <td className={styles.viewCell} onClick={() => goToCategories(r.id)} style={{ cursor: "pointer" }}>
+                      View <span className={styles.chev}>›</span>
+                    </td>
+
+                    <td className={styles.viewCell} onClick={() => goToPositions(r.id)} style={{ cursor: "pointer" }}>
+                      View <span className={styles.chev}>›</span>
+                    </td>
+
+                    <td className={styles.viewCell} onClick={() => goToOrders(r.id)} style={{ cursor: "pointer" }}>
+                      View <span className={styles.chev}>›</span>
+                    </td>
+
                     <td className={styles.eyeCell}>
                       <button type="button" className={styles.eyeBtn} onClick={() => openDetails(r)}>
                         👁
@@ -303,14 +320,8 @@ const AdminEstablishmentsPage: React.FC = () => {
           </table>
         </div>
 
-        {/* Details modal */}
-        <EstablishmentCardModal
-          open={detailsOpen}
-          onClose={() => setDetailsOpen(false)}
-          restaurant={activeRestaurant}
-        />
+        <EstablishmentCardModal open={detailsOpen} onClose={() => setDetailsOpen(false)} restaurant={activeRestaurant} />
 
-        {/* Confirm delete modal */}
         {confirmOpen && (
           <div className={styles.confirmOverlay} onMouseDown={() => setConfirmOpen(false)}>
             <div className={styles.confirmModal} onMouseDown={(e) => e.stopPropagation()}>
@@ -332,3 +343,5 @@ const AdminEstablishmentsPage: React.FC = () => {
 };
 
 export default AdminEstablishmentsPage;
+
+

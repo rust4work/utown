@@ -1,6 +1,7 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./EstablishmentCardModal.module.scss";
-import type { AdminRestaurant } from "../src/api/adminRestaurants";
+import type { AdminRestaurant } from "../../../api/adminRestaurants";
 
 type Props = {
   open: boolean;
@@ -9,9 +10,16 @@ type Props = {
 };
 
 const EstablishmentCardModal: React.FC<Props> = ({ open, onClose, restaurant }) => {
+  const navigate = useNavigate();
+
   if (!open || !restaurant) return null;
 
   const image = restaurant.imageUrl || "";
+
+  const onEdit = () => {
+    onClose();
+    navigate(`/admin/establishments/${restaurant.id}/edit`);
+  };
 
   return (
     <div className={styles.overlay} onMouseDown={onClose}>
@@ -30,12 +38,14 @@ const EstablishmentCardModal: React.FC<Props> = ({ open, onClose, restaurant }) 
           </div>
 
           <div className={styles.rightTop}>
-            <button className={styles.actionBtn} type="button">
-              Edit account <span className={styles.arrow}>→</span>
-            </button>
-            <button className={styles.actionBtn} type="button">
-              Menu <span className={styles.arrow}>→</span>
-            </button>
+            <div className={styles.rightTopButtons}>
+              <button className={styles.actionBtn} type="button" onClick={onEdit}>
+                Edit account <span className={styles.arrow}>→</span>
+              </button>
+              <button className={styles.actionBtn} type="button">
+                Menu <span className={styles.arrow}>→</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -89,9 +99,7 @@ const EstablishmentCardModal: React.FC<Props> = ({ open, onClose, restaurant }) 
 
               <div className={styles.block}>
                 <div className={styles.blockTitle}>Status:</div>
-                <div className={styles.blockText}>
-                  {restaurant.isActive ? "Active" : "Inactive"}
-                </div>
+                <div className={styles.blockText}>{restaurant.isActive ? "Active" : "Inactive"}</div>
               </div>
             </div>
           </div>

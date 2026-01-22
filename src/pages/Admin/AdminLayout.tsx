@@ -83,7 +83,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                       Client
                   </button>
                   <button className={styles.addMenuItem} type="button">Rider</button>
-                  <button className={styles.addMenuItem} type="button">Establishment</button>
+                  <button className={styles.addMenuItem} onClick={() => { setAddOpen(false); navigate("/admin/establishments/add");}}>Establishment</button>
                   <button className={styles.addMenuItem} type="button">Service</button>
                   <button className={styles.addMenuItem} type="button">Job Vacancy</button>
                 </div>
