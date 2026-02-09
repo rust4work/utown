@@ -54,3 +54,16 @@ button {
   }
   margin: 16px;
 }
+
+.backWhite {
+  width: 26px;
+  height: 26px;
+  background-image: url("../../assets/images/arrow-left-white.svg");
+  background-repeat: no-repeat;
+  background-size: 26px 26px;
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+  margin: 16px;
+}

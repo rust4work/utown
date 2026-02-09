@@ -1,0 +1,244 @@
+/* Общий контейнер страницы */
+
+.page {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+/* Верхняя панель */
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.titleBlock {
+    min-width: 240px;
+}
+
+.pageTitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #191d31;
+    margin: 0;
+}
+
+.breadcrumbs {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #7749f8;
+}
+
+.breadcrumbActive {
+    color: #111827;
+}
+
+
+/* Правый блок управления */
+
+.controlsBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.searchInput {
+    width: 308px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #d3d7e3;
+    font-size: 12px;
+    background: #fff;
+}
+
+.actionsRow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.select {
+    min-width: 150px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid #d3d7e3;
+    background: #ffffff;
+    font-size: 11px;
+    color: #667085;
+}
+
+.applyButton {
+    padding: 7px 12px;
+    border-radius: 4px;
+    border: none;
+    background: #2f2f2f;
+    color: #ffffff;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+
+/* Таблица-карточка */
+
+.tableWrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+
+/* Шапка таблицы */
+
+.table thead tr,
+.table thead th {
+    background: #f3f3f3;
+}
+
+.table th,
+.table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f1f2f6;
+    text-align: left;
+    vertical-align: middle;
+}
+
+
+/* Колонки */
+
+.checkboxCol {
+    width: 40px;
+}
+
+.eyeCol {
+    width: 44px;
+    text-align: right;
+}
+
+.addressCell {
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* Сортировка */
+
+.thWithSort {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    font-weight: 600;
+    color: #111827;
+}
+
+.sortIcon {
+    font-size: 10px;
+    color: #a7a9b7;
+    transform: translateY(-1px);
+}
+
+
+/* View */
+
+.viewLink {
+    border: none;
+    background: none;
+    padding: 0;
+    color: #101828;
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.viewArrow {
+    font-size: 14px;
+    line-height: 1;
+    color: #98a2b3;
+}
+
+
+/* Глаз */
+
+.eyeButton {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Пагинация внизу страницы */
+
+.paginationBottom {
+    margin-top: auto;
+    padding: 24px 0 8px;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Сама панель пагинации */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.paginationButton {
+    min-width: 32px;
+    height: 28px;
+    padding: 0 10px;
+    border: 1px solid #d9dce7;
+    background: #fff;
+    color: #191d31;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    &:not(:first-child) {
+        margin-left: -1px;
+    }
+    border-radius: 0;
+}
+
+.paginationButton:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.paginationButton:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.pageActive {
+    background: #2b2b2b;
+    color: #ffffff;
+    border-color: #2b2b2b;
+}
+
+.paginationButton:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
