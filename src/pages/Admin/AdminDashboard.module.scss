@@ -1,14 +1,3 @@
-/* Общий контейнер страницы */
-
-.page {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-
-/* Верхняя панель */
-
 .topBar {
     display: flex;
     justify-content: space-between;
@@ -16,6 +5,7 @@
     align-items: flex-start;
     gap: 24px;
     margin-bottom: 16px;
+    padding: 0 24px;
 }
 
 .titleBlock {
@@ -23,24 +13,30 @@
 }
 
 .pageTitle {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: 700;
-    color: #191d31;
+    color: #000;
     margin: 0;
 }
 
 .breadcrumbs {
-    margin-top: 4px;
+    margin-top: 22px;
     font-size: 12px;
+    color: #667085;
+}
+
+.breadcrumbLink {
     color: #7749f8;
+    cursor: pointer;
+}
+
+.breadcrumbs span:last-child {
+    color: #68717a;
 }
 
 .breadcrumbActive {
     color: #111827;
 }
-
-
-/* Правый блок управления */
 
 .controlsBlock {
     display: flex;
@@ -50,7 +46,7 @@
 }
 
 .searchInput {
-    width: 308px;
+    width: 488px;
     padding: 8px 12px;
     border-radius: 8px;
     border: 1px solid #d3d7e3;
@@ -65,47 +61,76 @@
 }
 
 .select {
-    min-width: 150px;
-    padding: 7px 10px;
+    min-width: 240px;
+    padding: 8px 10px;
     border-radius: 8px;
     border: 1px solid #d3d7e3;
-    background: #ffffff;
-    font-size: 11px;
+    background: #fff;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.selectText {
+    font-size: 14px;
     color: #667085;
 }
 
+.selectIcon {
+    display: inline-flex;
+}
+
 .applyButton {
-    padding: 7px 12px;
+    padding: 10px 19px;
     border-radius: 4px;
     border: none;
     background: #2f2f2f;
-    color: #ffffff;
+    color: #fff;
     font-size: 11px;
     cursor: pointer;
 }
 
-
-/* Таблица-карточка */
+.applyButton:hover {
+    background: #6b7280;
+    transition: .4s ease all;
+}
 
 .tableWrapper {
     background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 260px);
+    min-height: 520px;
 }
 
-.table {
+.tableContainer {
+    flex: 1;
     width: 100%;
+    overflow: auto;
+}
+
+.tableWrapper .table {
+    width: 100% !important;
+    min-width: 100% !important;
+    margin: 0 !important;
+    display: table !important;
     border-collapse: collapse;
+    table-layout: fixed;
     font-size: 12px;
 }
 
 
-/* Шапка таблицы */
+/* Шапка */
 
-.table thead tr,
+.table thead tr {
+    background: #f3f3f3;
+}
+
 .table thead th {
     background: #f3f3f3;
+    font-weight: 600;
+    color: #111827;
 }
 
 .table th,
@@ -120,30 +145,18 @@
 /* Колонки */
 
 .checkboxCol {
-    width: 40px;
+    width: 44px;
 }
 
 .eyeCol {
-    width: 44px;
-    text-align: right;
+    width: 56px;
+    text-align: center;
 }
-
-.addressCell {
-    max-width: 260px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-/* Сортировка */
 
 .thWithSort {
     display: inline-flex;
     gap: 6px;
     align-items: center;
-    font-weight: 600;
-    color: #111827;
 }
 
 .sortIcon {
@@ -177,8 +190,8 @@
 /* Глаз */
 
 .eyeButton {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -188,41 +201,38 @@
 }
 
 
-/* Пагинация внизу страницы */
+/* hover row */
 
-.paginationBottom {
-    margin-top: auto;
-    padding: 24px 0 8px;
-    display: flex;
-    justify-content: center;
+.clickableRow {
+    cursor: pointer;
 }
 
-
-/* Сама панель пагинации */
+.clickableRow:hover {
+    background: #fafafa;
+}
 
 .pagination {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 0;
+    padding: 12px 0 16px;
 }
 
 .paginationButton {
-    min-width: 32px;
-    height: 28px;
-    padding: 0 10px;
+    min-width: 40px;
+    height: 30px;
+    padding: 0 12px;
     border: 1px solid #d9dce7;
     background: #fff;
     color: #191d31;
     font-size: 11px;
-    font-weight: 500;
     cursor: pointer;
-    &:not(:first-child) {
-        margin-left: -1px;
-    }
     border-radius: 0;
+    margin-left: -1px;
 }
 
 .paginationButton:first-child {
+    margin-left: 0;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
@@ -234,11 +244,184 @@
 
 .pageActive {
     background: #2b2b2b;
-    color: #ffffff;
+    color: #fff;
     border-color: #2b2b2b;
 }
 
 .paginationButton:disabled {
     opacity: 0.4;
     cursor: default;
+}
+
+// filter // 
+.filterWrap {
+    position: relative;
+}
+
+.filterDropdown {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    width: 360px;
+    background: #fff;
+    border: 1px solid #d3d7e3;
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    z-index: 50;
+    overflow: hidden;
+}
+
+.filterHead {
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-bottom: 1px solid #e6e8f0;
+    color: #111827;
+}
+
+.filterSectionTitle {
+    padding: 10px 12px 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.filterList {
+    padding: 0 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.filterItem {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 13px;
+    color: #111827;
+    input {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.filterEmpty {
+    font-size: 12px;
+    color: #667085;
+}
+
+.filterActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 10px 12px;
+    border-top: 1px solid #e6e8f0;
+    background: #fff;
+}
+
+.filterCancel {
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 6px;
+    border: 1px solid #d0d5dd;
+    background: #fff;
+    cursor: pointer;
+}
+
+.filterApply {
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 6px;
+    border: none;
+    background: #0b57d0;
+    color: #fff;
+    cursor: pointer;
+}
+
+.filterClear {
+    width: 100%;
+    border: none;
+    background: #f7f7fb;
+    color: #111827;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-top: 1px solid #e6e8f0;
+}
+
+// action 
+.actionWrap {
+    position: relative;
+}
+
+.actionDropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 360px;
+    background: #fff;
+    border: 1px solid #eaecf0;
+    border-radius: 10px;
+    box-shadow: 0 12px 24px rgba(16, 24, 40, 0.18);
+    overflow: hidden;
+    z-index: 50;
+}
+
+.actionHead {
+    padding: 16px 18px;
+    font-size: 16px;
+    font-weight: 600;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.actionItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 18px;
+    border-bottom: 1px solid #f2f4f7;
+    font-size: 16px;
+    color: #101828;
+    input {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.actionDelete {
+    color: #b42318;
+}
+
+.actionActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 14px 18px;
+}
+
+.actionCancel {
+    height: 34px;
+    min-width: 80px;
+    border-radius: 6px;
+    border: 1px solid #d0d5dd;
+    background: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.actionApply {
+    height: 34px;
+    min-width: 80px;
+    border-radius: 6px;
+    border: 1px solid #175cd3;
+    background: #175cd3;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.addressCell {
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

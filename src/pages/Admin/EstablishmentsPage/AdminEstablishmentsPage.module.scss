@@ -1,0 +1,432 @@
+.head {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 16px;
+    padding: 0 24px;
+}
+
+.title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #101828;
+}
+
+.breadcrumbs {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #667085;
+}
+
+.breadcrumbLink {
+    color: #7a5af8;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.active {
+    color: #68717a;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.headBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.searchInputWrap {
+    position: relative;
+    width: 100%;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+}
+
+.search {
+    width: 488px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #d3d7e3;
+    font-size: 12px;
+    background: #fff;
+    color: #68717a;
+}
+
+.search::placeholder {
+    color: #68717a;
+}
+
+.filterRow {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.select {
+    min-width: 240px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #d3d7e3;
+    background: #fff;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #68717a;
+}
+
+
+/* Choose action (dropdown) */
+
+.actionDropdownWrap {
+    position: relative;
+    flex: 1;
+}
+
+.chooseActionBtn {
+    min-width: 240px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #d3d7e3;
+    background: #fff;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chooseActionText {
+    font-size: 14px;
+    color: #101828;
+}
+
+.chooseActionChevron {
+    opacity: 0.7;
+}
+
+.applyBtn {
+    padding: 10px 19px;
+    border-radius: 4px;
+    border: none;
+    background: #2f2f2f;
+    color: #fff;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.applyBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.applyBtn:hover {
+    background: #6b7280;
+    transition: .4s ease all;
+}
+
+.actionPopup {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 320px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 16px 32px rgba(16, 24, 40, 0.16);
+    border: 1px solid #eaecf0;
+    padding: 16px;
+    z-index: 50;
+}
+
+.actionTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: #101828;
+    margin-bottom: 12px;
+}
+
+.actionItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #101828;
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid #d0d5dd;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkboxLine {
+    height: 1px;
+    background: #eaecf0;
+    margin: 6px 0;
+}
+
+.deleteAction {
+    color: #d92d20;
+    font-weight: 600;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.cancelBtn {
+    height: 36px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 0 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.actionButtons .applyBtn {
+    background: #2e90fa;
+}
+
+
+/* Table */
+
+.tableWrap {
+    margin-top: 12px;
+    background: #ffffff;
+    overflow: hidden;
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background: #f3f3f3;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid #eaecf0;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f1f2f6;
+    font-size: 14px;
+    color: #101828;
+    vertical-align: middle;
+}
+
+.row {
+    cursor: pointer;
+}
+
+.row:hover {
+    background: #f9fafb;
+}
+
+.checkboxCell {
+    width: 42px;
+}
+
+.viewCell {
+    width: 54px;
+    text-align: center;
+}
+
+.viewBtn {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+}
+
+.eyeIcon {
+    opacity: 0.85;
+}
+
+.eyeIcon:hover {
+    opacity: 1;
+}
+
+.empty {
+    padding: 22px 14px;
+    color: #667085;
+    font-size: 14px;
+}
+
+
+/* Confirm delete modal */
+
+.confirmOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(16, 24, 40, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 80;
+}
+
+.confirmModal {
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(16, 24, 40, 0.22);
+}
+
+.confirmTitle {
+    margin: 0 0 14px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: #101828;
+}
+
+.confirmDelete {
+    width: 100%;
+    height: 44px;
+    border: none;
+    border-radius: 10px;
+    background: #f2f4f7;
+    color: #d92d20;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.error {
+    color: crimson;
+    margin: 10px 0;
+    font-weight: 600;
+}
+
+
+/* Choose action */
+
+.chooseActionWrap {
+    position: relative;
+}
+
+.caret {
+    font-size: 11px;
+    color: #667085;
+}
+
+.actionPopover {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 340px;
+    background: #fff;
+    border: 1px solid #eaecf0;
+    border-radius: 10px;
+    box-shadow: 0 14px 40px rgba(16, 24, 40, 0.18);
+    padding: 14px;
+    z-index: 50;
+}
+
+.deleteItem {
+    color: #d92d20;
+}
+
+.actionFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.actionCancel {
+    height: 34px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid #d0d5dd;
+    background: #fff;
+    cursor: pointer;
+}
+
+.actionApply {
+    height: 34px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 0;
+    background: #1976d2;
+    color: #fff;
+    cursor: pointer;
+}
+
+.hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #667085;
+}
+
+
+/* table small helpers */
+
+.viewCell {
+    color: #344054;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.chev {
+    margin-left: 6px;
+    color: #667085;
+}
+
+.eyeCell {
+    width: 44px;
+    text-align: right;
+}
+
+.eyeBtn {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+/* Confirm delete modal */
+
+.confirmCancel {
+    width: 100%;
+    height: 42px;
+    border-radius: 8px;
+    border: 0;
+    background: #101828;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}

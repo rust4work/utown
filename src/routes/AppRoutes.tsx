@@ -10,13 +10,14 @@ import {
 import ProtectedRoute from "./ProtectedRoutes";
 import { UserProvider } from "../utils/UserContext";
 
-// Pages
+// Public
 import LoginRegPage from "../pages/LoginRegPage/LoginRegPage";
 import LoginPage from "../pages/LoginRegPage/LoginPage/LoginPage";
 import RegisterPage from "../pages/LoginRegPage/RegisterPage/RegisterPage";
 import RecoverPasswordPage from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/RecoverPasswordPage";
 import Verification from "../pages/LoginRegPage/RegisterPage/Verification/Verification";
 
+// Client
 import ClientDashboard from "../pages/Client/ClientDashboard";
 import ClientHome from "../pages/Client/ClientLayouts/ClientHome/ClientHome";
 import ClientFavourites from "../pages/Client/ClientLayouts/ClientFavourites/ClientFavourites";
@@ -27,10 +28,34 @@ import Contact from "../pages/Client/ClientLayouts/ClientProfile/Contact/Contact
 import EditInfo from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditInfo";
 import EditPassword from "../pages/Client/ClientLayouts/ClientProfile/Account/Edit/EditPassword";
 
+// UTFood
+import UtFood from "../pages/UTFood/UtFood";
+import FoodHome from "../pages/UTFood/FoodHome/FoodHome";
+import Establishments from "../pages/UTFood/FoodHome/Establishments/Establishments";
+
+// Admin
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import AdminLoginPage from "../pages/Admin/AdminLoginPage";
+import AdminAddClientPage from "../pages/Admin/AddClientPage/AdminAddClientPage";
+import AdminEditClientPage from "../pages/Admin/EditClientPage/AdminEditClientPage";
+import AdminEstablishmentsPage from "../pages/Admin/EstablishmentsPage/AdminEstablishmentsPage";
+import AdminAddEstablishmentPage from "../pages/Admin/Establishments/AdminAddEstablishmentPage";
+import AdminEditEstablishmentPage from "../pages/Admin/EditEstablishmentPage/AdminEditEstablishmentPage";
+import AdminPositionsPage from "../pages/Admin/EstablishmentsPage/AdminPositionsPage";
+import AdminCategoriesPage from "../pages/Admin/EstablishmentsPage/AdminCategoriesPage";
+import AdminEditPositionPage from "../pages/Admin/EditPositionPage/AdminEditPositionPage";
+import AdminAddPositionPage from "../pages/Admin/AddPositionPage/AdminAddPositionPage";
+import AdminAddCategoryPage from "../pages/Admin/AddCategoryPage/AdminAddCategoryPage";
+import AdminOrderHistoryPage from "../pages/Admin/OrdersPage/AdminOrderHistoryPage";
+import AdminProtectedRoute from "../api/AdminProtectedRoute";
 
+// Restaurateur
 import ReastaraunterDashboard from "../pages/Restaurateur/RestaurateurDashboard";
+import RecoverVerification from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/RecoverVerification/RecoverVerification";
+import NewPassword from "../pages/LoginRegPage/LoginPage/RecoverPasswordPage/NewPassword/NewPassword";
+import RestaurantDetails from "../pages/UTFood/FoodHome/Establishments/RestaurantsDetails/RestaurantsDetail";
+
+import Checkout from "../pages/UTFood/FoodHome/Establishments/RestaurantsDetails/CheckoutPage/Checkout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,6 +66,8 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/verification" element={<Verification />} />
       <Route path="/recover-password" element={<RecoverPasswordPage />} />
+      <Route path="/recover-verification" element={<RecoverVerification />} />
+      <Route path="/new-password" element={<NewPassword />} />
 
       {/* Admin login MUST be public */}
       <Route path="/admin/login" element={<AdminLoginPage />} />
@@ -60,8 +87,29 @@ const router = createBrowserRouter(
           <Route path="profile/contact" element={<Contact />} />
         </Route>
 
+        {/* UTFOOD */}
+        <Route path="/food" element={<UtFood />}>
+          <Route index element={<FoodHome />} />
+          <Route path="establishments" element={<Establishments />} />
+          <Route path="establishments/:id" element={<RestaurantDetails />} />
+          <Route path="checkout" element={<Checkout />} />
+        </Route>
+
         {/* ADMIN */}
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route element={<AdminProtectedRoute />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/clients/add" element={<AdminAddClientPage />} />
+          <Route path="/admin/clients/:id/edit" element={<AdminEditClientPage />} />
+          <Route path="/admin/establishments" element={<AdminEstablishmentsPage />} />
+          <Route path="/admin/establishments/add" element={<AdminAddEstablishmentPage />} />
+          <Route path="/admin/establishments/:id/edit" element={<AdminEditEstablishmentPage  />} />
+          <Route path="/admin/establishments/:id/positions" element={<AdminPositionsPage />} />
+          <Route path="/admin/establishments/:id/categories" element={<AdminCategoriesPage />} />
+          <Route path="/admin/establishments/:id/categories/add" element={<AdminAddCategoryPage />} />
+          <Route path="/admin/establishments/:id/positions/add" element={<AdminAddPositionPage />} />
+          <Route path="/admin/establishments/:id/orders" element={<AdminOrderHistoryPage />} />
+          <Route path="/admin/establishments/:id/positions/:positionId/edit" element={<AdminEditPositionPage />}/>
+        </Route>
 
         {/* RESTAURATEUR */}
         <Route path="/restaurateur" element={<ReastaraunterDashboard />} />

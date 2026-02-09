@@ -1,69 +1,65 @@
 @use "../../styles/_variables" as *;
-
 * {
-  outline: none;
-  border: none;
-  box-sizing: border-box;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
 }
 
 button {
-  border-radius: 10px;
-  &[disabled] {
-    cursor: not-allowed;
-
-    opacity: 0.6;
-  }
+    &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
 }
 
 .primary {
-  background-color: #fff;
-  color: #000;
-  width: 90%;
-  max-width: 396px;
-  height: 64px;
-
-  &:hover {
-    cursor: pointer;
-    background-color: #eaeaea;
-    transition: background-color 0.3s ease;
-  }
+    background-color: #fff;
+    color: #000;
+    width: 90%;
+    max-width: 396px;
+    height: 64px;
+    &:hover {
+        cursor: pointer;
+        background-color: #eaeaea;
+        transition: background-color 0.3s ease;
+    }
 }
 
 .secondary {
-  background-color: $color-button-secondary;
-  color: #fff;
-  width: 90%;
-  max-width: 396px;
-  height: 64px;
-  &:hover {
-    cursor: pointer;
-    background-color: #074cd5;
-    transition: background-color 0.3s ease;
-  }
+    background-color: $color-button-secondary;
+    color: #fff;
+    width: 90%;
+    max-width: 396px;
+    height: 64px;
+    &:hover {
+        cursor: pointer;
+        background-color: #074cd5;
+        transition: background-color 0.3s ease;
+    }
 }
 
 .back {
-  width: 26px;
-  height: 26px;
-  background-image: url("../../assets/images/arrow-left.svg");
-  background-repeat: no-repeat;
-  background-size: 26px 26px;
-  background-color: #fff;
-  &:hover {
-    cursor: pointer;
-  }
-  margin: 16px;
+    width: 26px;
+    height: 26px;
+    background-image: url("../../assets/images/arrow-left.svg");
+    background-repeat: no-repeat;
+    background-size: 26px 26px;
+    background-color: #fff;
+    &:hover {
+        cursor: pointer;
+    }
+    margin: 16px;
 }
 
 .backWhite {
-  width: 26px;
-  height: 26px;
-  background-image: url("../../assets/images/arrow-left-white.svg");
-  background-repeat: no-repeat;
-  background-size: 26px 26px;
-  background-color: transparent;
-  &:hover {
-    cursor: pointer;
-  }
-  margin: 16px;
+    width: 26px;
+    height: 26px;
+    background-image: url("../../assets/images/arrow-left-white.svg");
+    background-repeat: no-repeat;
+    background-size: 26px 26px;
+    background-color: transparent;
+    &:hover {
+        cursor: pointer;
+    }
+    margin: 16px;
 }

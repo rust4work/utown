@@ -2,7 +2,7 @@
 
 .inputWrapper {
   position: relative;
-  width: 90%;
+  width: 100%;
   max-width: 396px;
 }
 
@@ -43,6 +43,7 @@
 }
 
 .passwordToggle {
+  width: 24px;
   position: absolute;
   right: 16px;
   top: 0;
