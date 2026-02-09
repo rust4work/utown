@@ -1,5 +1,5 @@
 import Logo from "../../components/Logo/Logo";
-import styles from "./LoginRegPage.module.css";
+import style from "./LoginRegPage.module.css";
 import Button from "../../components/Button/Button";
 import { useNavigateTo } from "../../hooks/useNavigateTo";
 
@@ -7,11 +7,11 @@ function LoginRegPage() {
   const { navigateTo } = useNavigateTo();
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.logoContainer}>
+    <div className={style.wrapper}>
+      <div className={style.logoContainer}>
         <Logo type="full" />
       </div>
-      <div className={styles.buttonContainer}>
+      <div className={style.buttonContainer}>
         <Button
           label="Login"
           typeOfButton="primary"

@@ -1,6 +1,6 @@
 import React from "react";
 
-function ReastaraunterDashboard() {
+function ReastarauteurDashboard() {
   return (
     <div>
       <h1>Restaraunter dashboard</h1>
@@ -8,4 +8,4 @@ function ReastaraunterDashboard() {
   );
 }
 
-export default ReastaraunterDashboard;
+export default ReastarauteurDashboard;

@@ -1,10 +1,16 @@
 import React from "react";
+//utils
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigateTo } from "../../../hooks/useNavigateTo";
+import { login } from "../../../api/login";
+
+//components
 import Button from "../../../components/Button/Button";
 import style from "./LoginPage.module.scss";
 import Logo from "../../../components/Logo/Logo";
 import Input from "../../../components/Input/Input";
+import { Spin, Alert } from "antd";
 
 type LoginFormData = {
   phoneNumber: string;
@@ -13,6 +19,8 @@ type LoginFormData = {
 
 function LoginPage() {
   const { navigateTo } = useNavigateTo();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -22,9 +30,18 @@ function LoginPage() {
     mode: "onBlur",
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log("Form data:", data);
-    navigateTo("/client")();
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await login(data.phoneNumber, data.password);
+      sessionStorage.setItem("token", response.token);
+      sessionStorage.setItem("refreshToken", response.refreshToken);
+      navigateTo("/client")();
+    } catch (err: any) {
+      setError("");
+      setLoading(false);
+    }
   };
 
   return (
@@ -55,20 +72,36 @@ function LoginPage() {
           <Input
             type="password"
             placeholder="Password"
+            password={true}
             {...register("password", {
               required: "Password is required",
               minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
+                value: 9,
+                message: "Password must be at least 9 characters",
               },
             })}
           />
           {errors.password && (
             <p className={style.error}>{errors.password.message}</p>
           )}
+          {/*error alert*/}
+          <div>
+            {error && (
+              <p className={style.error}>
+                Couldn't find user. Please check username and password and try
+                again
+              </p>
+            )}
+          </div>
 
           <Button label="Log in" typeOfButton="secondary" type="submit" />
         </form>
+        {/* Loading */}
+        {loading && (
+          <div className={style.loader}>
+            <Spin size="large" />
+          </div>
+        )}
       </main>
 
       <footer>
